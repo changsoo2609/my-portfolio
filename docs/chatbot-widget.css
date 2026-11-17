@@ -1,0 +1,22 @@
+#pf-chat-launcher{position:fixed;right:22px;bottom:22px;z-index:1000;border:0;border-radius:999px;padding:14px 19px;background:#1b3bff;color:#fff;font:600 14px Pretendard,system-ui,sans-serif;box-shadow:0 8px 26px rgba(27,59,255,.25);cursor:pointer}
+#pf-chat-launcher:focus-visible,#pf-chat button:focus-visible,#pf-chat textarea:focus-visible{outline:3px solid #8398ff;outline-offset:2px}
+#pf-chat[hidden],#pf-chat-launcher[hidden]{display:none!important}
+#pf-chat{position:fixed;right:22px;bottom:84px;z-index:1000;width:min(395px,calc(100vw - 28px));max-height:min(650px,calc(100dvh - 110px));display:flex;flex-direction:column;border:1px solid #dadad6;border-radius:16px;background:#fff;color:#1a1c1b;box-shadow:0 18px 60px rgba(16,20,28,.2);overflow:hidden;font-family:Pretendard,system-ui,sans-serif}
+.pf-chat-header{display:flex;justify-content:space-between;align-items:center;gap:10px;background:#f4f3f0;padding:16px;border-bottom:1px solid #e3e2de}
+.pf-chat-header strong{font-size:15px}
+.pf-chat-header p{font-size:12px;color:#666;margin:4px 0 0}
+.pf-chat-close{background:transparent;border:0;cursor:pointer;font-size:23px;line-height:1;padding:4px 7px;color:#555}
+#pf-chat-messages{padding:16px;display:flex;flex-direction:column;gap:10px;min-height:130px;overflow-y:auto;flex:1;scrollbar-width:thin}
+.pf-bubble{font-size:13px;line-height:1.65;white-space:pre-wrap;overflow-wrap:anywhere;padding:10px 12px;border-radius:12px;max-width:92%;background:#f4f3f0;align-self:flex-start}
+.pf-bubble.user{background:#edf0ff;align-self:flex-end}
+.pf-chat-quick{display:flex;flex-wrap:wrap;gap:7px;padding:0 16px 10px}
+.pf-chat-quick button{background:#fff;color:#1b3bff;border:1px solid #cbd3ff;border-radius:8px;padding:7px;font-size:12px;cursor:pointer;text-align:left}
+.pf-chat-form{padding:12px 16px 15px;border-top:1px solid #e3e2de;display:flex;flex-direction:column;gap:8px}
+.pf-chat-form label{font-size:12px;color:#666}
+#pf-chat-question{font:inherit;font-size:13px;min-height:62px;width:100%;max-width:100%;resize:vertical;padding:10px;border:1px solid #dadad6;border-radius:8px}
+.pf-chat-form button[type=submit]{padding:10px;background:#1b3bff;color:#fff;border:0;border-radius:8px;font-weight:600;cursor:pointer}
+.pf-chat-form button:disabled{opacity:.5;cursor:not-allowed}
+#pf-chat-status{font-size:11px;color:#777;min-height:15px}
+.pf-chat-links{padding:0 16px 12px;display:flex;flex-wrap:wrap;gap:8px}
+.pf-chat-links a{font-size:11px;color:#1b3bff;text-decoration:underline}
+@media(max-width:520px){#pf-chat-launcher{right:13px;bottom:13px}#pf-chat{right:14px;bottom:74px;max-height:calc(100dvh - 92px)}}
