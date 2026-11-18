@@ -3,15 +3,15 @@
   const config = window.PORTFOLIO_CHAT_CONFIG || {};
   const enabled = String(config.apiUrl || '').startsWith('https://') && !!config.turnstileSiteKey;
   const quickQuestions = [
-    '어떤 풀스택 개발 경험이 있나요?',
-    '농담 프로젝트 수상과 담당 역할은?',
+    '어떤 직무를 희망하고 어떤 경험이 있나요?',
+    '밭머리 프로젝트 수상과 담당 역할은?',
     'GenMark AI에서 맡은 백엔드 작업은?',
     '프론트엔드 경험은 어떤가요?',
   ];
   const offlineAnswers = [
-    'ClassFlowAI에서 웹 화면·Agent·인증·학습 기능을 연동했고, 해빛에서 사용자 UI를, GenMark AI와 농담 프로젝트에서 백엔드와 데이터베이스 연동을 경험했습니다.',
-    '농담은 농장주와 외국인 근로자의 현장 소통을 돕는 1박 2일 솔버톤 팀 프로젝트입니다. MVP 범위를 간이 번역과 현장 용어 피드백으로 좁혔고, FastAPI·Supabase API와 PyTest 검증, 밤샘 디버깅으로 시연 안정화에 기여했습니다. 팀은 최우수상(1위)을 수상했습니다.',
-    'GenMark AI에서 API 계약과 데이터 모델링, Spring Boot 서비스 백엔드 및 MariaDB 연동 등 팀 백엔드 개발에 참여했습니다.',
+    'AI 서비스 개발자와 주니어 풀스택 엔지니어를 희망합니다. ClassFlowAI의 OCR 기록과 학습 기능, 해빛 UI, 밭머리와 GenMark AI의 백엔드 개발을 경험했습니다.',
+    '밭머리는 농장주와 외국인 근로자의 작업 소통을 돕는 솔버톤 팀 프로젝트입니다. FastAPI·Supabase 백엔드의 접근 권한, 작업 버전과 전달 API를 맡았습니다. 팀은 최우수상(트랙 1위)을 수상했습니다.',
+    'GenMark AI는 로고 생성과 상표 유사도 분석 서비스입니다. 팀 README에는 백엔드 개발과 AI 프롬프팅 담당으로 기록돼 있습니다.',
     '해빛에서 HTML·CSS·JavaScript로 부모/아이 화면, 미션 인증, 보상과 펫 성장 UI를 구현했습니다.',
   ];
   const make = (tag, className, text) => {
@@ -25,6 +25,7 @@
   launcher.type = 'button';
   launcher.setAttribute('aria-controls', 'pf-chat');
   launcher.setAttribute('aria-expanded', 'false');
+  launcher.setAttribute('aria-label', 'Q/A 포트폴리오 질문');
   const panel = make('section');
   panel.id = 'pf-chat';
   panel.hidden = true;
@@ -47,9 +48,11 @@
   label.htmlFor = 'pf-chat-question';
   const question = make('textarea');
   question.id = 'pf-chat-question';
+  question.name = 'question';
+  question.autocomplete = 'off';
   question.maxLength = 400;
   question.required = true;
-  question.placeholder = '예: 농담 프로젝트에서 어떤 문제를 해결했나요?';
+  question.placeholder = '예: 밭머리에서 맡은 일은…';
   question.addEventListener('keydown', event => {
     if (event.key === 'Enter' && !event.shiftKey && !event.isComposing) {
       event.preventDefault();
@@ -63,10 +66,12 @@
   submit.type = 'submit';
   const status = make('span', '', enabled ? '봇 검증을 완료하면 질문을 보낼 수 있습니다.' : '포트폴리오에 관한 질문에 준비된 답변으로 안내합니다.');
   status.id = 'pf-chat-status';
+  status.setAttribute('role', 'status');
+  question.setAttribute('aria-describedby', status.id);
   form.append(label, question, captcha, submit, status);
   const links = make('div', 'pf-chat-links');
   [
-    ['농담 GitHub', 'https://github.com/da960822-ux/kidding'],
+    ['밭머리', 'https://github.com/da960822-ux/kidding'],
     ['GenMark AI', 'https://github.com/mgim14636-art/GenMark_AI'],
     ['해빛', 'https://github.com/kimyoungsu61/Child_Habit'],
   ].forEach(([label, url]) => {
@@ -77,7 +82,16 @@
     links.append(a);
   });
   panel.append(header, messages, quick, form, links);
-  document.body.append(panel, launcher);
+  document.body.append(panel);
+  const launcherSlot = document.querySelector('[data-chat-launcher-slot]');
+  const docked = window.matchMedia('(max-width: 1023px)');
+  function placeLauncher() {
+    const restoreFocus = document.activeElement === launcher;
+    (docked.matches && launcherSlot ? launcherSlot : document.body).append(launcher);
+    if (restoreFocus) launcher.focus();
+  }
+  placeLauncher();
+  docked.addEventListener('change', placeLauncher);
 
   let widgetId = null;
   let busy = false;
@@ -89,18 +103,18 @@
   };
   write(enabled ? '안녕하세요. 공개된 프로젝트 소개를 바탕으로 답변합니다. 비밀번호나 개인정보는 입력하지 마세요.' : '안녕하세요. 프로젝트, 담당 역할, 기술 경험에 대해 질문해 주세요. 준비된 내용을 바탕으로 안내합니다.');
   const localAnswers = [
-    { words: ['classflow', '클래스플로우', '클래스 플로우'], answer: 'ClassFlowAI는 개인 프로젝트입니다. 웹 화면과 Agent, 인증 및 학습 기능을 연동했습니다. 자세한 내용은 포트폴리오의 ClassFlowAI 소개를 확인해 주세요.' },
+    { words: ['classflow', '클래스플로우', '클래스 플로우'], answer: 'ClassFlowAI는 Windows 화면을 OCR·CAP으로 기록해 수업별 학습 자료와 복습 데이터를 만드는 개인 도구입니다.' },
     { words: ['농담', '農談', '밭머리', 'batmeori', '솔버톤', '최우수', '수상'], answer: offlineAnswers[1] },
     { words: ['genmark', '젠마크', '젠 마크'], answer: offlineAnswers[2] },
     { words: ['해빛', 'haebit', '펫', '부모', '아이'], answer: offlineAnswers[3] },
     { words: ['프론트', 'frontend', 'front-end', '화면', 'ui'], answer: offlineAnswers[3] },
-    { words: ['풀스택', 'fullstack', 'full-stack', '경험', '프로젝트'], answer: offlineAnswers[0] },
-    { words: ['백엔드', 'backend', 'back-end', '서버', 'api', '데이터베이스', 'db'], answer: 'GenMark AI에서는 Spring Boot와 MariaDB를, 농담 프로젝트에서는 FastAPI와 Supabase를 활용한 백엔드 개발에 참여했습니다.' },
+    { words: ['직무', '희망', '포지션', '풀스택', 'fullstack', 'full-stack', '경험', '프로젝트'], answer: offlineAnswers[0] },
+    { words: ['백엔드', 'backend', 'back-end', '서버', 'api', '데이터베이스', 'db'], answer: '밭머리에서는 FastAPI·Supabase 백엔드를, GenMark AI에서는 팀 백엔드 개발과 AI 프롬프팅을 맡았습니다.' },
   ];
   function answerLocally(text) {
     const normalized = text.toLowerCase();
     const match = localAnswers.find(item => item.words.some(word => normalized.includes(word)));
-    return match ? match.answer : '해당 질문에 대한 준비된 답변을 찾지 못했습니다. ClassFlowAI, 농담 프로젝트, GenMark AI, 해빛 또는 프론트엔드·백엔드 경험에 대해 질문해 주세요.';
+    return match ? match.answer : '준비된 답변을 찾지 못했습니다. ClassFlowAI, 밭머리, GenMark AI 또는 해빛에 대해 질문해 주세요.';
   }
   quickQuestions.forEach((q, i) => {
     const button = make('button', '', q);
@@ -131,9 +145,13 @@
         theme: 'light',
         size: 'normal',
         appearance: 'interaction-only',
+        callback: () => { status.textContent = '봇 검증을 완료했습니다. 질문을 보낼 수 있습니다.'; },
+        'error-callback': () => {
+          status.textContent = '봇 검증을 완료하지 못했습니다. 아래 프로젝트 링크를 이용해 주세요.';
+        },
       });
     };
-    script.onerror = () => { status.textContent = '봇 검증 모듈을 불러오지 못했습니다.'; };
+    script.onerror = () => { status.textContent = '봇 검증을 불러오지 못했습니다. 아래 프로젝트 링크를 사용할 수 있습니다.'; };
     document.head.append(script);
   }
 
@@ -143,7 +161,8 @@
     launcher.setAttribute('aria-expanded', String(open));
     if (open) {
       loadTurnstile();
-      question.focus();
+      if (docked.matches) close.focus();
+      else question.focus();
     } else {
       launcher.focus();
     }
@@ -168,14 +187,14 @@
     }
     const token = widgetId !== null ? window.turnstile?.getResponse(widgetId) : '';
     if (!token) {
-      status.textContent = '봇 검증을 완료한 뒤 다시 보내주세요.';
+      status.textContent = '봇 검증을 완료한 뒤 다시 보내 주세요. 검증이 보이지 않으면 아래 프로젝트 링크를 이용해 주세요.';
       return;
     }
     busy = true;
     submit.disabled = true;
     write(text, 'user');
     question.value = '';
-    status.textContent = '답변을 생성하고 있습니다.';
+    status.textContent = '답변을 생성하고 있습니다…';
     try {
       const controller = new AbortController();
       const timeout = setTimeout(() => controller.abort(), 25000);
