@@ -44,6 +44,48 @@
     #home { padding-block: 3rem 3.5rem; }
     #home .hero-award .shrink-0:last-child { flex-wrap: wrap; justify-content: center; }
   }
+  @media (max-width: 1279px) {
+    html { scroll-padding-top: 7.5rem; }
+    header > div { height: auto; display: flex; flex-wrap: wrap; gap: .5rem; padding-block: .6rem; }
+    header nav[data-active-classes] {
+      order: 1;
+      display: flex;
+      width: 100%;
+      overflow-x: auto;
+      scrollbar-width: thin;
+      white-space: nowrap;
+    }
+    header nav a { flex: none; }
+    body > main { padding-top: 7.5rem; }
+  }
+  @media (max-width: 640px) {
+    header > div { padding-inline: .75rem; }
+    header > div > div:first-child { flex: 1; min-width: 0; }
+    header > div > div:first-child a > span { line-height: 1.35; }
+    header nav a { padding: .45rem .55rem; font-size: .68rem; }
+    #home { padding-block: 2.5rem 3rem; }
+    #home h1 { font-size: clamp(1.75rem, 7vw, 2.5rem); line-height: 1.35; }
+    #home h1 > span { font-size: .86em; }
+    #home .hero-actions { width: 100%; gap: .6rem; margin-bottom: 2rem; }
+    #home .hero-actions a { flex: 1 1 9rem; justify-content: center; padding: .7rem .65rem; font-size: .85rem; }
+    #home .hero-award, #arcana-grid .arcana-card { padding: 1rem; }
+    #home .hero-award div { min-width: 0; }
+    #home .hero-award .flex { flex-wrap: wrap; }
+    #arcana-filter { max-width: 100%; flex-wrap: wrap; justify-content: center; }
+    #arcana-filter button { padding-inline: .65rem; min-height: 36px; }
+    #arcana-grid { min-width: 0; }
+    #arcana-grid .arcana-card { min-width: 0; overflow-wrap: anywhere; }
+    #arcana-grid .arcana-card .justify-between { flex-wrap: wrap; gap: .5rem; }
+    #arcana-grid .arcana-card img { max-width: 100%; }
+    #pf-chat-launcher { right: 12px; bottom: max(12px, env(safe-area-inset-bottom)); }
+    #pf-chat {
+      right: 10px;
+      bottom: max(12px, env(safe-area-inset-bottom));
+      width: min(395px, calc(100vw - 20px));
+      max-height: calc(100dvh - 24px - env(safe-area-inset-bottom));
+      overflow-y: auto;
+    }
+  }
 </style></head><body class="bg-surface font-body-md text-on-surface antialiased selection:bg-secondary-container selection:text-on-secondary-container" style="word-break: keep-all; overflow-wrap: break-word; letter-spacing: -0.012em; line-height: 1.7;"><header class="fixed top-0 left-0 w-full z-50 bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(8,18,48,0.04)]"><div class="h-20 max-w-[1440px] mx-auto px-margin-mobile lg:px-margin flex items-center justify-between gap-space-md"><div class="flex flex-col"><a class="group flex flex-col" data-path="overview" href="#home"><span class="font-tarot-title text-tarot-title text-primary tracking-widest transition-colors">CHANGSOO HAN <span class="text-secondary font-light opacity-60 font-body-sm">//</span> PORTFOLIO</span><span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mt-space-xs">Junior Backend &amp; Full-Stack Engineer</span></a></div><nav class="hidden xl:flex items-center gap-space-xs" data-active-classes="bg-primary-container text-on-primary font-bold rounded-lg shadow-sm"><a aria-current="page" class="px-space-sm py-space-xs rounded font-label-md text-label-md hover:text-on-surface hover:bg-surface-container transition-all bg-primary-container text-on-primary font-bold rounded-lg shadow-sm" data-path="overview" href="#home">01. INTRO</a><a class="px-space-sm py-space-xs rounded font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" data-path="core-projects" href="#major-arcana-plates">02. PROJECTS</a><a class="px-space-sm py-space-xs rounded font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" data-path="observatory" href="#research">03. RESEARCH</a><a class="px-space-sm py-space-xs rounded font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" data-path="tech-stack" href="#skills">04. TECH STACK</a><a class="px-space-sm py-space-xs rounded font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" data-path="contact" href="#celestial-dispatch">05. CONTACT</a></nav><div class="flex items-center gap-space-sm"><a class="hidden sm:inline-flex items-center px-space-sm py-space-xs rounded font-label-sm text-label-sm text-primary hover:bg-surface-container transition-all" href="https://github.com/changsoo2609" rel="noopener noreferrer" target="_blank">GitHub ↗</a><a class="inline-flex items-center px-space-md py-space-xs rounded bg-primary text-on-primary font-label-sm text-label-sm shadow-[0_0_12px_rgba(233,195,73,0.18)] hover:bg-primary-container transition-all" data-path="contact" href="#celestial-dispatch">이력서 / 제안</a><a href="#celestial-dispatch" aria-label="연락처" class="w-8 h-8 rounded-full bg-primary flex items-center justify-center ml-space-xs shadow-inner"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></a></div></div></header><main class="w-full pt-20 bg-surface min-h-[calc(100vh-80px)]"><div class="flex flex-col w-full relative">
 <!-- Celestial Ambient Constellation Backdrop Layer -->
 <div class="absolute inset-0 pointer-events-none overflow-hidden select-none">
