@@ -20,7 +20,7 @@
     if (text) el.textContent = text;
     return el;
   };
-  const launcher = make('button', '', 'AI 포트폴리오 Q&A');
+  const launcher = make('button', '', 'Q/A');
   launcher.id = 'pf-chat-launcher';
   launcher.type = 'button';
   launcher.setAttribute('aria-controls', 'pf-chat');
