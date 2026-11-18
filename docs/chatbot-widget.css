@@ -25,15 +25,18 @@
 #pf-chat-launcher {
   display: grid;
   place-items: center;
-  width: 64px;
-  height: 64px;
+  width: 84px;
+  height: 84px;
   padding: 0;
-  border: 2px solid #f2d775;
-  background: conic-gradient(from 215deg, #b68a2c, #f7e7a5, #d4af37, #fff0b3, #a87920, #b68a2c);
+  border: 1px solid #f8e4a0;
+  background:
+    repeating-radial-gradient(circle, #fff0bd24 0 1px, #5b39051c 1px 2px, transparent 2px 3px),
+    radial-gradient(circle, transparent 58%, #643f12 63%, #fff0ad 66%, #a07022 70%, transparent 72%),
+    conic-gradient(from 215deg, #865318, #fff0b4, #b98528, #e7c25f, #fff4cb, #91601c, #865318);
   color: #1e2746;
-  font: 700 17px Inter, system-ui, sans-serif;
+  font: 700 21px Inter, system-ui, sans-serif;
   text-shadow: 0 1px #fff2bd;
-  box-shadow: inset 0 0 0 4px #b98d32, 0 7px 20px #1e274633;
+  box-shadow: inset 0 1px 2px #fff5d1, inset 0 -3px 5px #603a0d80, 0 3px 0 #8b621e, 0 9px 20px #1e274640;
 }
 #pf-chat-launcher:hover { filter: brightness(1.08); }
 #pf-chat-launcher:focus-visible,
@@ -66,6 +69,6 @@
 .pf-chat-form button[type=submit] { background: #1e2746; color: #fff0bc; border-radius: 999px; }
 .pf-chat-links a { color: #1e2746; }
 @media (max-width: 520px) {
-  #pf-chat-launcher { width: 56px; height: 56px; font-size: 15px; }
+  #pf-chat-launcher { width: 68px; height: 68px; font-size: 18px; }
   #pf-chat { bottom: 82px; max-height: calc(100dvh - 94px); }
 }
