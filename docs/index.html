@@ -32,7 +32,7 @@
   .wordmark span { white-space: nowrap; }
   .wordmark .wordmark-divider { color: #735c00; }
   .site-header nav { display: flex; align-items: center; gap: 4px; }
-  .site-header nav a, .hero-actions a, .project-filter button, .project-links a, .project-links button {
+  .site-header nav a, .project-filter button, .project-links a, .project-links button {
     display: inline-flex;
     min-height: 44px;
     align-items: center;
@@ -45,24 +45,83 @@
     background: #1e2746;
     color: #fff;
   }
-  #home { isolation: isolate; }
-  #home::before {
+  #home {
+    overflow: hidden;
+    color: #fcfcff;
+    background:
+      radial-gradient(ellipse at 82% 37%, #344c86 0%, #1e2b55 34%, transparent 65%),
+      #081230;
+  }
+  .hero-layout {
+    display: grid;
+    grid-template-columns: minmax(0, .86fr) minmax(0, 1.14fr);
+    align-items: center;
+    gap: clamp(1rem, 4vw, 4rem);
+    padding-block: clamp(2.8rem, 3.5vw, 4.25rem);
+  }
+  .hero-copy h1 { margin: 0; font-size: clamp(3.5rem, 7.7vw, 5.75rem); font-weight: 600; line-height: 1.08; letter-spacing: -.035em; text-wrap: balance; }
+  .hero-name { display: block; }
+  .hero-role { display: block; margin-top: .8rem; color: #f9dc8b; font-size: clamp(1.125rem, 2.55vw, 1.9rem); }
+  .hero-intro { max-width: 38ch; margin: 1.1rem 0 1.4rem; color: #e0e6f5; font-size: 16px; line-height: 1.65; text-wrap: pretty; }
+  .hero-actions, .project-links { display: flex; flex-wrap: wrap; align-items: center; gap: .25rem .75rem; }
+  .hero-award {
+    width: fit-content;
+    max-width: 100%;
+    display: flex;
+    align-items: center;
+    gap: .85rem;
+    margin-block: 1.5rem 1.2rem;
+    padding: .65rem 1rem .65rem .8rem;
+    border: 1px solid #c69c49;
+    border-radius: 12px;
+    background: #1e2746;
+    text-decoration: none;
+  }
+  .hero-award:hover { background: #303b61; }
+  .hero-award .award-rank { color: #ffdf85; font: 600 clamp(1.9rem, 3.5vw, 2.7rem)/1 "EB Garamond", serif; white-space: nowrap; }
+  .award-details { display: grid; gap: .2rem; font-size: 14px; line-height: 1.4; }
+  .award-details small { color: #f8dda6; font-size: 13px; }
+  #home a:focus-visible, .featured-flow a:focus-visible { outline-color: #ffdf85; }
+  .hero-showcase {
+    position: relative;
+    isolation: isolate;
+    display: grid;
+    align-content: center;
+    min-width: 0;
+    padding: clamp(1.2rem, 4vw, 3rem) clamp(.3rem, 2.7vw, 2rem) clamp(1rem, 3vw, 2rem);
+  }
+  .hero-orbit { position: absolute; z-index: -1; inset: 2% -7% 8%; pointer-events: none; }
+  .hero-orbit::before, .hero-orbit::after {
     content: "";
     position: absolute;
-    z-index: -1;
-    inset: 0;
-    background:
-      radial-gradient(circle at 79% 38%, #fcfcff 0 9%, #ebedff 13%, #c3d7f8 16%, #dce4fa 18%, transparent 19%),
-      radial-gradient(circle at 98% 101%, #fcfcff 0 7%, #edf1ff 10%, #dbe1fa 13%, transparent 14%),
-      #fcfcff;
+    inset: 4% 0;
+    border: 1px solid #e8c679b5;
+    border-radius: 50%;
+    transform: rotate(-18deg);
   }
-  .hero-copy { padding-block: clamp(3.5rem, 7vw, 6rem); }
-  .hero-copy h1 { margin: 0; font-size: clamp(3.25rem, 7vw, 5.5rem); font-weight: 600; line-height: 1.15; letter-spacing: -.035em; text-wrap: balance; }
-  .hero-name { display: block; }
-  .hero-role { display: block; margin-top: .75rem; color: #735c00; font-size: clamp(1.25rem, 3vw, 2rem); }
-  .hero-copy p { max-width: 41ch; margin: 1.4rem 0 1.15rem; font-size: 16px; line-height: 1.75; text-wrap: pretty; }
-  .hero-actions, .project-links { display: flex; flex-wrap: wrap; align-items: center; gap: .25rem .75rem; }
-  .hero-actions a { padding-inline: 1rem; font-size: 15px; font-weight: 600; }
+  .hero-orbit::after { inset: -3% 7%; border-color: #a5b8ed99; transform: rotate(24deg); }
+  .hero-orbit i { position: absolute; top: 18%; right: 11%; width: 9px; height: 9px; border-radius: 50%; background: #fae3a8; box-shadow: 0 0 15px #ffdc89; }
+  .hero-orbit i + i { top: auto; bottom: 14%; right: auto; left: 11%; width: 5px; height: 5px; background: #b9cbff; }
+  .showcase-frame { display: block; padding: 7px; border: 1px solid #d8b36d; border-radius: 16px; background: #152144; box-shadow: 0 20px 45px #070d26a0; }
+  .showcase-frame img { display: block; width: 100%; height: auto; border-radius: 9px; }
+  .hero-showcase figcaption { margin-top: .65rem; color: #e3e8f8; font-size: 13px; text-align: right; }
+  .astryx-action-group { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; }
+  .astryx-action-group .portfolio-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: .65rem .95rem;
+    border: 1px solid var(--action-border, #b1a172);
+    border-radius: 8px;
+    background: var(--action-bg, #fff);
+    color: var(--action-text, #172447);
+    font: 600 14px/1.3 Inter, system-ui, sans-serif;
+    text-decoration: none;
+  }
+  .astryx-action-group .portfolio-action:hover { background: var(--action-hover, #f5e8bb); }
+  .hero-actions { --action-bg: #1e2b55; --action-border: #899ac2; --action-text: #fff; --action-hover: #35476f; }
+  .astryx-action-group .portfolio-action.is-primary { --action-bg: #ffdc89; --action-border: #ffdc89; --action-text: #192644; --action-hover: #ffe8b2; }
   .project-section { background: #f2f3f7; padding: clamp(2.75rem, 5vw, 4.5rem) 20px; overflow-anchor: none; }
   main h2 { font-size: clamp(1.75rem, 3vw, 2rem); line-height: 1.25; text-wrap: balance; }
   .project-heading { display: flex; flex-wrap: wrap; align-items: center; gap: .75rem 1.5rem; margin-bottom: 1.5rem; }
@@ -79,6 +138,21 @@
   .arcana-card dl { display: grid; gap: .55rem; margin-block: 1.1rem .75rem; }
   .arcana-card dl div { display: grid; grid-template-columns: minmax(5.75rem, max-content) 1fr; gap: .5rem; }
   .arcana-card dt, .experience-list dt { color: #081230; font-weight: 600; }
+  .featured-project {
+    grid-column: 1 / -1;
+    padding: clamp(1.3rem, 4vw, 3.4rem);
+    border-color: #cbb980;
+    background: linear-gradient(115deg, #fff9e8, #fffdf7 62%, #f0f3fb);
+  }
+  .featured-layout { display: grid; grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr); align-items: center; gap: clamp(1.1rem, 4vw, 4rem); }
+  .featured-project [data-award] { margin-top: .45rem; color: #735c00; font-size: 14px; font-weight: 700; }
+  .featured-project h3 { font-size: clamp(2.5rem, 5vw, 4rem); line-height: 1.12; }
+  .featured-project .project-links { margin-top: 1rem; }
+  .featured-flow { padding: clamp(1rem, 2.2vw, 1.9rem); border-radius: 14px; background: #172447; color: #fcfcff; }
+  .featured-flow h4 { color: #f9dc8b; font-weight: 600; }
+  .featured-flow ol { display: grid; gap: .65rem; margin-top: .8rem; list-style: none; }
+  .featured-flow li { display: grid; grid-template-columns: 1.8rem 1fr; gap: .55rem; align-items: center; font-size: 15px; }
+  .featured-flow li span { display: grid; width: 1.8rem; height: 1.8rem; place-items: center; border: 1px solid #e8c679; border-radius: 50%; color: #ffdc89; font: 600 15px "EB Garamond", serif; }
   .project-links a, .project-links button { color: #253f78; padding-inline: 0; text-decoration: underline; text-underline-offset: .22em; font-size: 14px; font-weight: 600; }
   .project-links :is(a, button):hover { color: #735c00; }
   .project-media { margin-block: 1rem .4rem; }
@@ -90,13 +164,15 @@
   .experience-list div { display: grid; grid-template-columns: 9rem 1fr; gap: .75rem; padding: .75rem 0; border-bottom: 1px solid #dce1ec; }
   #copy-status { color: #45464e; font-size: 14px; min-height: 1.5em; }
   footer { padding-bottom: max(5rem, env(safe-area-inset-bottom)); }
-  @media (min-width: 768px) {
-    .hero-copy { padding-block: clamp(3rem, 4.3vw, 4.25rem) clamp(2rem, 3.25vw, 3.25rem); }
-  }
   @media (min-width: 1024px) {
     .project-section { padding-inline: 48px; }
+    .project-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   }
   @media (max-width: 767px) {
+    .hero-layout, .featured-layout { grid-template-columns: minmax(0, 1fr); }
+    .hero-layout { gap: 1rem; padding-block: 2.5rem 1.5rem; }
+    .hero-showcase { padding: 1.35rem .5rem .5rem; }
+    .hero-orbit { inset: -3% -3% 9%; }
     .project-grid { grid-template-columns: minmax(0, 1fr); }
   }
   @media (max-width: 540px) {
@@ -107,15 +183,25 @@
     .wordmark .wordmark-divider { display: none; }
     .site-header nav { gap: 0; }
     .site-header nav a { min-width: 44px; justify-content: center; padding-inline: 4px; font-size: 13px; }
-    #home::before {
-      background: radial-gradient(circle at 95% 20%, #fcfcff 0 7%, #e9ecff 20%, #d6e4fa 24%, transparent 25%), #fcfcff;
-    }
     .experience-list div { grid-template-columns: 1fr; gap: .2rem; }
   }
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation: none !important; transition: none !important; }
   }
-</style></head><body class="bg-surface font-body-md text-on-surface antialiased selection:bg-secondary-container selection:text-on-secondary-container">
+</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@astryxdesign/core@0.7.16/dist/astryx.css">
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@19.3.1",
+    "react/jsx-runtime": "https://esm.sh/react@19.3.1/jsx-runtime",
+    "react-dom": "https://esm.sh/react-dom@19.3.1?external=react",
+    "react-dom/client": "https://esm.sh/react-dom@19.3.1/client?external=react",
+    "@astryxdesign/core/Button": "https://esm.sh/@astryxdesign/core@0.7.16/Button?external=react,react-dom"
+  }
+}
+</script>
+</head><body class="bg-surface font-body-md text-on-surface antialiased selection:bg-secondary-container selection:text-on-secondary-container">
 <a class="skip-link" href="#main-content">본문 바로가기</a>
 <header class="fixed top-0 left-0 w-full z-50 bg-surface/95 shadow-sm">
 <div class="site-header max-w-[1440px] mx-auto px-margin-mobile lg:px-margin">
@@ -147,13 +233,26 @@
 </svg>
 </div>
 <section id="home" class="w-full relative">
-<div class="hero-copy mx-auto max-w-[1440px] px-margin-mobile lg:px-margin">
-<h1 class="text-primary"><span class="hero-name">한창수</span><span class="hero-role">주니어 백엔드 · 풀스택 개발자</span></h1>
-<p class="text-on-surface-variant">밭머리에서 FastAPI·Supabase로 작업 전달 API와 접근 권한을 구현했습니다. 프로젝트별로 제가 맡은 작업과 GitHub 근거를 정리했습니다.</p>
-<div class="hero-actions">
-<a class="bg-primary text-white hover:bg-primary-container" href="#major-arcana-plates">프로젝트 보기 <span aria-hidden="true">↓</span></a>
-<a class="text-primary hover:bg-surface-container" href="https://github.com/changsoo2609" rel="noopener noreferrer" target="_blank">GitHub <span aria-hidden="true">↗</span></a>
+<div class="hero-layout mx-auto max-w-[1440px] px-margin-mobile lg:px-margin">
+<div class="hero-copy">
+<h1><span class="hero-name">한창수</span><span class="hero-role">주니어 백엔드 · 풀스택 개발자</span></h1>
+<p class="hero-intro">밭머리에서 FastAPI·Supabase로 작업 전달 API와 접근 권한을 구현했습니다.</p>
+<a class="hero-award" href="#project-batmeori">
+<strong class="award-rank">1위</strong>
+<span class="award-details"><strong>2026 전남광주 청년 AI 솔버톤</strong><small>트랙 최우수상 · 밭머리 팀 수상</small></span>
+</a>
+<div class="hero-actions astryx-action-group" data-astryx-actions>
+<a class="portfolio-action is-primary" href="#project-batmeori">수상 프로젝트 보기</a>
+<a class="portfolio-action" href="https://github.com/changsoo2609" rel="noopener noreferrer" target="_blank">GitHub</a>
 </div>
+</div>
+<figure class="hero-showcase">
+<span class="hero-orbit" aria-hidden="true"><i></i><i></i></span>
+<a class="showcase-frame" href="https://batmeori.vercel.app/start" target="_blank" rel="noopener noreferrer" aria-label="밭머리 실제 서비스 시작 화면 열기">
+<img src="./batmeori-start.jpg" width="1265" height="712" alt="밭머리에서 농장주와 근로자가 이용 방법을 선택하는 실제 화면" fetchpriority="high">
+</a>
+<figcaption>밭머리 · 공개 서비스 시작 화면</figcaption>
+</figure>
 </div>
 </section>
 
@@ -171,13 +270,30 @@
 <p id="project-status" class="sr-only" role="status"></p>
 </div>
 <div id="arcana-grid" class="project-grid">
-<article class="arcana-card" data-arcana="batmeori">
+<article class="arcana-card featured-project" id="project-batmeori" data-arcana="batmeori" tabindex="-1">
+<div class="featured-layout">
+<div>
 <h3>밭머리 <span lang="en">Batmeori</span></h3>
-<p>농장주와 외국인 근로자가 작업 지시를 전달하고 확인하는 팀 프로젝트입니다.</p>
-<dl><div><dt>내 역할</dt><dd>FastAPI·Supabase 백엔드, 접근 권한, 버전 트랜잭션, 전달 API</dd></div></dl>
+<p data-award>2026 전남광주 청년 AI 솔버톤 최우수상 (트랙 1위)</p>
+<p>농장주가 말로 작업을 지시하면 외국인 근로자가 베트남어 또는 네팔어로 최신 지시를 확인하는 서비스입니다.</p>
+<dl><div><dt>내 역할</dt><dd>FastAPI·Supabase 백엔드, 접근 권한, 작업 지시 버전 관리, 전달 API</dd></div></dl>
+<div class="astryx-action-group" data-astryx-actions>
+<a class="portfolio-action is-primary" href="https://batmeori.vercel.app/start" target="_blank" rel="noopener noreferrer">서비스 열기</a>
+<a class="portfolio-action" href="https://github.com/da960822-ux/kidding/blob/main/docs/openapi.yaml" target="_blank" rel="noopener noreferrer">OpenAPI 명세</a>
+</div>
 <div class="project-links">
 <a href="https://github.com/da960822-ux/kidding#readme" target="_blank" rel="noopener noreferrer">밭머리 README <span aria-hidden="true">↗</span></a>
-<a href="https://github.com/da960822-ux/kidding/blob/main/docs/openapi.yaml" target="_blank" rel="noopener noreferrer">OpenAPI 명세 <span aria-hidden="true">↗</span></a>
+<a href="https://gsolverthon.kr/" target="_blank" rel="noopener noreferrer">대회 안내·본선 명단 <span aria-hidden="true">↗</span></a>
+</div>
+</div>
+<div class="featured-flow">
+<h4>작업 지시가 전달되는 흐름</h4>
+<ol role="list">
+<li><span aria-hidden="true">1</span>농장주가 현장에서 말로 지시</li>
+<li><span aria-hidden="true">2</span>AI가 정리한 작업을 농장주가 검토</li>
+<li><span aria-hidden="true">3</span>근로자가 링크나 QR로 최신 지시 확인</li>
+</ol>
+</div>
 </div>
 </article>
 
@@ -281,8 +397,10 @@
   const filters = document.querySelectorAll('[data-filter]');
   const cards = document.querySelectorAll('[data-arcana]');
   const projectStatus = document.getElementById('project-status');
-  const classflowCard = document.getElementById('project-classflow');
-  const classflowHash = '#project-classflow';
+  function linkedProject() {
+    const target = document.getElementById(location.hash.slice(1));
+    return target?.matches('[data-arcana]') ? target : null;
+  }
   filters.forEach(button => {
     button.addEventListener('click', () => {
       const all = button.dataset.filter === 'all';
@@ -291,7 +409,7 @@
       cards.forEach(card => { card.hidden = !all && card.dataset.arcana !== button.dataset.filter; });
       const offset = button.getBoundingClientRect().top - filterTop;
       if (Math.abs(offset) > 1) window.scrollBy(0, offset);
-      if (location.hash === classflowHash && classflowCard.hidden) {
+      if (linkedProject()?.hidden) {
         history.replaceState(history.state, '', '#major-arcana-plates');
       }
       projectStatus.textContent = all ? '프로젝트 4개 표시' : button.textContent + ' 프로젝트 표시';
@@ -299,10 +417,11 @@
     });
   });
   window.addEventListener('hashchange', () => {
-    if (location.hash !== classflowHash || !classflowCard.hidden) return;
-    document.querySelector('[data-filter="classflow"]').click();
-    classflowCard.focus({ preventScroll: true });
-    classflowCard.scrollIntoView();
+    const card = linkedProject();
+    if (!card?.hidden) return;
+    Array.from(filters).find(button => button.dataset.filter === card.dataset.arcana)?.click();
+    card.focus({ preventScroll: true });
+    card.scrollIntoView();
     updateSectionNav();
   });
 
@@ -318,4 +437,6 @@
   });
 </script></main><footer class="w-full bg-surface-container-low py-space-xl shadow-[0_-1px_12px_rgba(8,18,48,0.03)]"><div class="max-w-[1440px] mx-auto px-margin-mobile lg:px-margin flex flex-col md:flex-row items-center justify-between gap-space-lg"><p class="font-label-md text-label-md text-primary">© 2026 한창수</p><div class="flex items-center gap-space-md font-label-sm text-label-sm text-on-surface-variant"><a class="hover:text-primary transition-colors" href="https://github.com/changsoo2609" rel="noopener noreferrer" target="_blank">GitHub</a><a class="hover:text-primary transition-colors" href="mailto:changsoo2609@gmail.com">이메일</a></div></div></footer>
 
-<script src="./chatbot-config.js"></script><script defer src="./chatbot-widget.js?v=polish"></script></body></html>
+<script src="./chatbot-config.js"></script><script defer src="./chatbot-widget.js?v=polish"></script>
+<script type="module" src="./portfolio-actions.mjs"></script>
+</body></html>
