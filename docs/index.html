@@ -75,6 +75,16 @@
       background-color: #1b3bff;
       border-radius: 9999px;
     }
+    main section h2 { letter-spacing: -0.025em; line-height: 1.25; }
+    main article h3, main h4 { letter-spacing: -0.02em; line-height: 1.35; }
+    main p, main li { letter-spacing: -0.01em; line-height: 1.7; }
+    #work article p, #work article li, #creative-lab article p { font-size: 0.9375rem; }
+    #work article h3 { font-size: clamp(1.5rem, 1.35rem + 0.7vw, 2rem); }
+    #work article a { font-size: 0.8125rem; line-height: 1.45; }
+    .nongdam-visual { margin: 1.25rem 0 0; overflow: hidden; border: 1px solid #dedfd8; border-radius: 0.75rem; background: #f4f5ee; }
+    .nongdam-visual img { display: block; width: 100%; aspect-ratio: 3 / 1; object-fit: cover; }
+    .nongdam-visual figcaption { padding: 0.65rem 1rem; font-size: 0.8125rem; line-height: 1.5; color: #4b5148; }
+    @media (max-width: 640px) { .nongdam-visual img { aspect-ratio: 16 / 9; } }
   </style>
 <link rel="stylesheet" href="./chatbot-widget.css">
 </head>
@@ -303,7 +313,10 @@
 </div>
 </div>
 </div>
-<!-- Concise 4-Step Pipeline Bar -->
+<figure class="nongdam-visual">
+<img src="https://raw.githubusercontent.com/da960822-ux/kidding/bf34e47ee20a122015a8fed2f03f65fbb12c516e/public/images/cta-farm.png" alt="밭과 비닐하우스가 있는 농장 일러스트" loading="lazy" decoding="async">
+<figcaption>농담 프로젝트 소개 이미지 · 팀 GitHub 자료</figcaption>
+</figure>
 
 </article>
 <!-- ===================================================================== -->
