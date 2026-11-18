@@ -61,3 +61,35 @@
   white-space: normal;
   height: auto;
 }
+
+/* A quiet light over the existing celestial background. */
+.celestial-glimmer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: .45;
+  background: radial-gradient(circle at 76% 30%, rgba(255, 224, 136, .32), transparent 28%);
+}
+
+@media (hover: hover) {
+  #home .hero-award { transition: box-shadow 180ms ease; }
+  #home .hero-award:hover { box-shadow: 0 12px 30px #1e274622; }
+}
+.celestial-heading { position: relative; }
+.celestial-heading::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(110deg, transparent 38%, rgba(233, 195, 73, .24) 49%, transparent 60%);
+  background-size: 240% 100%;
+  animation: celestial-sweep 1.4s ease-out .3s both;
+}
+@keyframes celestial-sweep {
+  from { background-position: 100% 0; opacity: 0; }
+  30% { opacity: 1; }
+  to { background-position: 0 0; opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .celestial-heading::after { animation: none; opacity: 0; }
+}

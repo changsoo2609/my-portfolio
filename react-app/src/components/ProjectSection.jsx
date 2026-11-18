@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import ProjectFilter from './ProjectFilter.jsx';
 import ProjectCard from './ProjectCard.jsx';
 import { projects, FILTERS } from '../data/projects.js';
@@ -6,6 +7,7 @@ import { projects, FILTERS } from '../data/projects.js';
 // SECTION I: MAJOR ARCANA PLATES (4 Selected Engineering Constellations)
 export default function ProjectSection({ projectFilterScrollRef }) {
   const [filter, setFilter] = useState('all');
+  const reduced = useReducedMotion();
   const filterTopRef = useRef(null);
 
   const handleFilter = (value) => {
@@ -50,18 +52,23 @@ export default function ProjectSection({ projectFilterScrollRef }) {
           {status}
         </p>
         {/* Constellation Deck Grid */}
-        <div
+        <AnimatePresence mode="wait" initial={false}>
+        <motion.div
+          key={filter}
+          exit={reduced ? undefined : { opacity: 0, transition: { duration: 0.16 } }}
           className={`grid grid-cols-1 gap-space-lg ${filter === 'all' ? 'lg:grid-cols-2' : ''}`}
           id="arcana-grid"
         >
-          {projects.map((project) => (
+          {projects.map((project, index) => (
             <ProjectCard
-              key={project.key}
+              key={`${project.key}-${filter}`}
+              index={index}
               project={project}
               visible={filter === 'all' || filter === project.key}
             />
           ))}
-        </div>
+        </motion.div>
+        </AnimatePresence>
       </div>
     </section>
   );

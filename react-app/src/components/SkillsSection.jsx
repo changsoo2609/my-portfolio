@@ -1,3 +1,5 @@
+import { motion, useReducedMotion } from 'motion/react';
+
 const PILLARS = [
   {
     icon: 'palette',
@@ -41,6 +43,8 @@ const PILLARS = [
 
 // SECTION III: CONSTELLATION SPECTRUM (개발 역량 및 기술 스펙트럼)
 export default function SkillsSection() {
+  const reduced = useReducedMotion();
+  const mobile = typeof window !== 'undefined' && window.matchMedia('(max-width: 640px)').matches;
   return (
     <section id="skills" className="scroll-mt-20 w-full bg-surface-container-low/70 py-24">
       <div className="max-w-[1440px] mx-auto px-margin-mobile lg:px-margin">
@@ -64,8 +68,12 @@ export default function SkillsSection() {
         </div>
         {/* 4 Pillars Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-space-md">
-          {PILLARS.map((pillar) => (
-            <div
+          {PILLARS.map((pillar, index) => (
+            <motion.div
+              initial={reduced ? false : { opacity: 0.55, y: mobile ? 24 : 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.1 }}
+              transition={{ duration: 0.7, delay: reduced ? 0 : index * 0.1, ease: [0.16, 1, 0.3, 1] }}
               key={pillar.tag}
               className="bg-surface-container-lowest rounded-xl p-space-lg shadow-md flex flex-col justify-between"
             >
@@ -95,7 +103,7 @@ export default function SkillsSection() {
                   {pillar.footer}
                 </span>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

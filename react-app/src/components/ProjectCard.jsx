@@ -1,3 +1,4 @@
+import { motion, useReducedMotion } from 'motion/react';
 import { Badge } from '@astryxdesign/core/Badge';
 
 const DEFAULT_BADGE_CLASS =
@@ -10,12 +11,19 @@ function isExternal(href) {
   return href.startsWith('http');
 }
 
-export default function ProjectCard({ project: p, visible }) {
+export default function ProjectCard({ project: p, visible, index }) {
+  const reduced = useReducedMotion();
+  const mobile = typeof window !== 'undefined' && window.matchMedia('(max-width: 640px)').matches;
   const badgeClass = p.badgeVariant === 'award' ? AWARD_BADGE_CLASS : DEFAULT_BADGE_CLASS;
 
   return (
-    <article
-      className={`arcana-card atelier-card bg-surface-container-lowest rounded-xl p-space-xl ${p.cardClass} flex flex-col justify-between transition-all hover:-translate-y-1 hover:shadow-2xl relative overflow-hidden group`}
+    <motion.article
+      initial={reduced ? false : { opacity: 0.55, y: mobile ? 24 : 32 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.1 }}
+      whileHover={reduced ? undefined : { y: -8, transition: { duration: 0.2 } }}
+      transition={{ duration: 0.7, delay: reduced ? 0 : index * 0.1, ease: [0.16, 1, 0.3, 1] }}
+      className={`arcana-card atelier-card bg-surface-container-lowest rounded-xl p-space-xl ${p.cardClass} flex flex-col justify-between transition-shadow hover:shadow-2xl relative overflow-hidden group`}
       data-arcana={p.key}
       style={visible ? undefined : { display: 'none' }}
     >
@@ -126,6 +134,6 @@ export default function ProjectCard({ project: p, visible }) {
           )}
         </div>
       </div>
-    </article>
+    </motion.article>
   );
 }

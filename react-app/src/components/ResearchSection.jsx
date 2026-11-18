@@ -1,5 +1,10 @@
+import { motion, useReducedMotion } from 'motion/react';
+
 // SECTION II: OBSERVATORY & LAB EXPERIMENTS (천체 관측실 / 연구 기록)
 export default function ResearchSection() {
+  const reduced = useReducedMotion();
+  const mobile = typeof window !== 'undefined' && window.matchMedia('(max-width: 640px)').matches;
+  const reveal = (delay) => reduced ? {} : { initial: { opacity: 0.55, y: mobile ? 24 : 30 }, whileInView: { opacity: 1, y: 0 }, viewport: { once: true, amount: 0.1 }, transition: { duration: 0.7, delay, ease: [0.16, 1, 0.3, 1] } };
   return (
     <section
       id="research"
@@ -25,7 +30,7 @@ export default function ResearchSection() {
       {/* Lab Bento Layout */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-space-lg">
         {/* Lab 01 Plate */}
-        <div className="bg-surface-container-lowest rounded-xl p-space-xl shadow-md relative overflow-hidden flex flex-col justify-between">
+        <motion.div {...reveal(0)} className="bg-surface-container-lowest rounded-xl p-space-xl shadow-md relative overflow-hidden flex flex-col justify-between">
           <div className="flex items-center justify-between pb-space-sm mb-space-md">
             <span className="font-label-sm text-label-sm text-secondary font-semibold uppercase tracking-wider">
               LAB EXP 01 // GENERATIVE AI PIPELINE
@@ -69,9 +74,9 @@ export default function ResearchSection() {
               science
             </span>
           </div>
-        </div>
+        </motion.div>
         {/* Lab 02 Plate */}
-        <div className="bg-surface-container-lowest rounded-xl p-space-xl shadow-md relative overflow-hidden flex flex-col justify-between">
+        <motion.div {...reveal(0.08)} className="bg-surface-container-lowest rounded-xl p-space-xl shadow-md relative overflow-hidden flex flex-col justify-between">
           <div className="flex items-center justify-between pb-space-sm mb-space-md">
             <span className="font-label-sm text-label-sm text-secondary font-semibold uppercase tracking-wider">
               LAB EXP 02 // QUALITY ENGINEERING & TESTING
@@ -116,7 +121,7 @@ export default function ResearchSection() {
               verified
             </span>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
