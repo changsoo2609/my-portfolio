@@ -642,6 +642,8 @@
   const navSections = navLinks.map(link => document.getElementById(link.hash.slice(1)));
   const activeClasses = sectionNav.dataset.activeClasses.split(' ');
 
+  let projectFilterScroll = null;
+
   function updateSectionNav() {
     const headerBottom = sectionNav.closest('header').getBoundingClientRect().bottom;
     let current = 0;
@@ -651,6 +653,13 @@
     const page = document.scrollingElement;
     if (page.scrollHeight > page.clientHeight && page.scrollHeight - page.scrollTop - page.clientHeight <= 2) {
       current = navLinks.length - 1;
+    }
+    if (projectFilterScroll !== null) {
+      if (Math.abs(window.scrollY - projectFilterScroll) <= 2) {
+        current = navLinks.findIndex(link => link.hash === '#major-arcana-plates');
+      } else {
+        projectFilterScroll = null;
+      }
     }
     navLinks.forEach((link, index) => {
       const active = index === current;
@@ -663,6 +672,10 @@
 
   window.addEventListener('scroll', updateSectionNav, { passive: true });
   window.addEventListener('resize', updateSectionNav);
+  window.addEventListener('hashchange', () => {
+    projectFilterScroll = null;
+    updateSectionNav();
+  });
   window.addEventListener('pageshow', updateSectionNav);
   updateSectionNav();
 
@@ -672,6 +685,8 @@
   filters.forEach(button => {
     button.setAttribute('aria-pressed', String(button.dataset.filter === 'all'));
     button.addEventListener('click', () => {
+      const filterBar = button.closest('#arcana-filter');
+      const filterTop = filterBar.getBoundingClientRect().top;
       projectGrid.classList.toggle('lg:grid-cols-2', button.dataset.filter === 'all');
       filters.forEach(filter => {
         const selected = filter === button;
@@ -683,6 +698,10 @@
       cards.forEach(card => {
         card.style.display = button.dataset.filter === 'all' || button.dataset.filter === card.dataset.arcana ? '' : 'none';
       });
+      const offset = filterBar.getBoundingClientRect().top - filterTop;
+      if (Math.abs(offset) > 0.5) window.scrollBy({ top: offset, behavior: 'instant' });
+      projectFilterScroll = window.scrollY;
+      updateSectionNav();
     });
   });
   // Copy Email Functionality with Feedback
