@@ -4,13 +4,13 @@
   const enabled = String(config.apiUrl || '').startsWith('https://') && !!config.turnstileSiteKey;
   const quickQuestions = [
     '어떤 풀스택 개발 경험이 있나요?',
-    '농담(農談) 최우수상과 담당 역할은?',
+    '농담 프로젝트 수상과 담당 역할은?',
     'GenMark AI에서 맡은 백엔드 작업은?',
     '프론트엔드 경험은 어떤가요?',
   ];
   const offlineAnswers = [
-    'ClassFlowAI에서 웹 화면·Agent·인증·학습 기능을 연동했고, 해빛에서 사용자 UI를, GenMark AI·농담(農談)에서 백엔드와 데이터베이스 연동을 경험했습니다.',
-    '농담(農談)은 농장주와 외국인 근로자의 현장 소통을 돕는 1박 2일 솔버톤 팀 프로젝트입니다. MVP 범위를 간이 번역과 현장 용어 피드백으로 좁혔고, FastAPI·Supabase API와 PyTest 검증, 밤샘 디버깅으로 시연 안정화에 기여했습니다. 팀은 최우수상(1위)을 수상했습니다.',
+    'ClassFlowAI에서 웹 화면·Agent·인증·학습 기능을 연동했고, 해빛에서 사용자 UI를, GenMark AI와 농담 프로젝트에서 백엔드와 데이터베이스 연동을 경험했습니다.',
+    '농담은 농장주와 외국인 근로자의 현장 소통을 돕는 1박 2일 솔버톤 팀 프로젝트입니다. MVP 범위를 간이 번역과 현장 용어 피드백으로 좁혔고, FastAPI·Supabase API와 PyTest 검증, 밤샘 디버깅으로 시연 안정화에 기여했습니다. 팀은 최우수상(1위)을 수상했습니다.',
     'GenMark AI에서 API 계약과 데이터 모델링, Spring Boot 서비스 백엔드 및 MariaDB 연동 등 팀 백엔드 개발에 참여했습니다.',
     '해빛에서 HTML·CSS·JavaScript로 부모/아이 화면, 미션 인증, 보상과 펫 성장 UI를 구현했습니다.',
   ];
@@ -49,7 +49,7 @@
   question.id = 'pf-chat-question';
   question.maxLength = 400;
   question.required = true;
-  question.placeholder = '예: 농담(農談)에서 어떤 문제를 해결했나요?';
+  question.placeholder = '예: 농담 프로젝트에서 어떤 문제를 해결했나요?';
   question.addEventListener('keydown', event => {
     if (event.key === 'Enter' && !event.shiftKey && !event.isComposing) {
       event.preventDefault();
@@ -66,7 +66,7 @@
   form.append(label, question, captcha, submit, status);
   const links = make('div', 'pf-chat-links');
   [
-    ['농담(農談)', 'https://github.com/da960822-ux/kidding'],
+    ['농담 GitHub', 'https://github.com/da960822-ux/kidding'],
     ['GenMark AI', 'https://github.com/mgim14636-art/GenMark_AI'],
     ['해빛', 'https://github.com/kimyoungsu61/Child_Habit'],
   ].forEach(([label, url]) => {
@@ -95,12 +95,12 @@
     { words: ['해빛', 'haebit', '펫', '부모', '아이'], answer: offlineAnswers[3] },
     { words: ['프론트', 'frontend', 'front-end', '화면', 'ui'], answer: offlineAnswers[3] },
     { words: ['풀스택', 'fullstack', 'full-stack', '경험', '프로젝트'], answer: offlineAnswers[0] },
-    { words: ['백엔드', 'backend', 'back-end', '서버', 'api', '데이터베이스', 'db'], answer: 'GenMark AI에서는 Spring Boot와 MariaDB를, 농담(農談)에서는 FastAPI와 Supabase를 활용한 백엔드 개발에 참여했습니다.' },
+    { words: ['백엔드', 'backend', 'back-end', '서버', 'api', '데이터베이스', 'db'], answer: 'GenMark AI에서는 Spring Boot와 MariaDB를, 농담 프로젝트에서는 FastAPI와 Supabase를 활용한 백엔드 개발에 참여했습니다.' },
   ];
   function answerLocally(text) {
     const normalized = text.toLowerCase();
     const match = localAnswers.find(item => item.words.some(word => normalized.includes(word)));
-    return match ? match.answer : '해당 질문에 대한 준비된 답변을 찾지 못했습니다. ClassFlowAI, 농담(農談), GenMark AI, 해빛 또는 프론트엔드·백엔드 경험에 대해 질문해 주세요.';
+    return match ? match.answer : '해당 질문에 대한 준비된 답변을 찾지 못했습니다. ClassFlowAI, 농담 프로젝트, GenMark AI, 해빛 또는 프론트엔드·백엔드 경험에 대해 질문해 주세요.';
   }
   quickQuestions.forEach((q, i) => {
     const button = make('button', '', q);
