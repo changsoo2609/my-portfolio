@@ -1,0 +1,172 @@
+:root {
+  --atelier-navy: #081230;
+  --atelier-navy-soft: #1e2746;
+  --atelier-gold: #735c00;
+  --atelier-paper: #f8f9fd;
+  --atelier-white: #fff;
+  --atelier-chip: #edeef2;
+  --atelier-ink: #45464e;
+  --atelier-radius-card: .5rem;
+  --atelier-radius-action: .85rem;
+  --atelier-touch-target: 44px;
+  --atelier-header-height: 5rem;
+  --atelier-anchor-gap: 1rem;
+  --atelier-motion: 180ms ease;
+}
+
+@media (max-width: 1279px) {
+  :root { --atelier-header-height: 7.5rem; }
+}
+
+html {
+  overflow-anchor: none;
+  scroll-padding-top: calc(var(--atelier-header-height) + var(--atelier-anchor-gap));
+}
+
+body { background-color: var(--atelier-paper); }
+body > main { padding-top: var(--atelier-header-height); overflow-x: clip; }
+
+:is(a, button, textarea, summary):focus-visible {
+  outline: 3px solid var(--atelier-gold);
+  outline-offset: 2px;
+}
+
+.atelier-skip-link {
+  position: fixed;
+  z-index: 1100;
+  top: 1rem;
+  left: 1rem;
+  padding: .75rem 1rem;
+  border-radius: var(--atelier-radius-card);
+  background: var(--atelier-navy);
+  color: var(--atelier-white);
+  transform: translateY(calc(-100% - 2rem));
+}
+
+.atelier-skip-link:focus { transform: none; }
+
+.atelier-button {
+  min-height: var(--atelier-touch-target);
+  touch-action: manipulation;
+  transition: background-color var(--atelier-motion), color var(--atelier-motion);
+}
+
+.hero-actions .atelier-button { border-radius: var(--atelier-radius-action); }
+.atelier-hero-summary { text-wrap: balance; }
+
+.atelier-button--primary {
+  background-color: var(--atelier-navy);
+  color: var(--atelier-white);
+}
+
+.atelier-button--primary:hover { background-color: var(--atelier-navy-soft); }
+
+.atelier-button--secondary {
+  background-color: var(--atelier-white);
+  color: var(--atelier-navy);
+}
+
+.atelier-button--secondary:hover { background-color: var(--atelier-chip); }
+
+.atelier-section-title { text-wrap: balance; }
+
+.atelier-card {
+  border-radius: var(--atelier-radius-card);
+  transition: transform var(--atelier-motion), box-shadow var(--atelier-motion), background-color var(--atelier-motion);
+}
+
+.atelier-card .atelier-detail {
+  color: var(--atelier-ink);
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.atelier-detail-label { flex: 0 0 5rem; }
+
+.atelier-chip {
+  border-radius: .125rem;
+  background-color: var(--atelier-chip);
+  color: var(--atelier-navy);
+}
+
+.atelier-card a, .atelier-card button {
+  min-height: var(--atelier-touch-target);
+}
+
+.atelier-card-footer { gap: .35rem .75rem; }
+
+/* 형제 카드의 블록 시작 높이를 맞춘다: 본문 블록이 카드 높이를 채우고
+   마지막 블록(지표 상자·기술 목록)은 하단에 고정해 같은 Y 좌표에서 시작한다. */
+#research > .grid > div > div:nth-child(2),
+#skills > div > .grid > div > div:first-child {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+#research > .grid > div > div:nth-child(2) > :last-child,
+#skills > div > .grid > div > div:first-child > :last-child {
+  margin-top: auto;
+}
+
+/* 플레이트 번호(✦ 02)는 긴 라벨에 눌려 두 줄로 나뉘지 않도록 축소를 막는다 */
+#arcana-grid .arcana-card .font-tarot-title {
+  flex: none;
+  white-space: nowrap;
+}
+
+/* 시상 배지가 포함된 카드의 헤더만 높아져 제목이 어긋나지 않도록 헤더 높이를 맞춘다 */
+#arcana-grid .arcana-card > div > div:first-child {
+  min-height: 44px;
+}
+
+/* 필터가 우측 정렬 컨테이너에 붙어 있을 때 줄바꿈된 행도 같은 오른쪽 모서리에 정렬된다 */
+@media (min-width: 768px) {
+  #arcana-filter { justify-content: flex-end; }
+}
+.atelier-card a { text-underline-offset: .2em; }
+.atelier-card a:hover { text-decoration: underline; }
+.atelier-card a[href^="mailto:"] { display: inline-flex; align-items: center; overflow-wrap: anywhere; }
+
+#pf-chat-launcher, #pf-chat :is(button, a) { touch-action: manipulation; }
+
+@media (max-width: 1023px) {
+  #pf-chat { max-height: min(650px, calc(100dvh - var(--atelier-header-height) - 24px)); }
+}
+
+#arcana-filter button { min-height: 2rem; }
+#arcana-filter button, header nav a { touch-action: manipulation; }
+
+@media (max-width: 1279px) {
+  header.atelier-header > div { height: auto; }
+  header nav[data-active-classes] { padding: 3px; }
+}
+
+@media (max-width: 640px) {
+  header.atelier-header > div {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: .35rem .45rem;
+  }
+  header nav[data-active-classes] { grid-area: 2 / 1 / auto / -1; min-width: 0; }
+  header nav[data-active-classes] a { display: inline-flex; align-items: center; min-height: var(--atelier-touch-target); font-size: .75rem; }
+  .atelier-header > div > div:first-child a > span:first-child { font-size: 1rem; letter-spacing: .06em; }
+  /* 직무명이 두 줄로 나뉠 때 마지막 줄에 '엔지니어'만 남지 않도록 줄을 균형 있게 나눈다 */
+  .atelier-header > div > div:first-child a > span:last-child { text-wrap: balance; }
+  .atelier-header-actions { grid-area: 1 / 2; gap: .25rem; }
+  .atelier-header-actions .atelier-button { padding-inline: .6rem; white-space: nowrap; }
+  #home.atelier-hero { padding-block-start: 1.75rem; }
+  #home .atelier-hero-summary { margin-bottom: 1.5rem; }
+  #home .hero-award .atelier-award-copy { flex-wrap: nowrap; align-items: flex-start; gap: .75rem; }
+  #home .atelier-award-copy > .shrink-0 { width: 2.75rem; height: 2.75rem; }
+  #arcana-filter button { min-height: var(--atelier-touch-target); }
+  #celestial-dispatch > div { padding: 1.25rem; }
+  #celestial-dispatch .atelier-card { padding: 1rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,0 +1,63 @@
+/*
+ * React 마운트 구조와 Astryx 컴포넌트를 기존 Celestial Atelier 디자인에
+ * 맞추는 보완 규칙. docs/design-system.css 사본은 원본과 동일하게 유지한다.
+ */
+
+/* 1) 기존 `body > main` 규칙은 React 구조(Theme 래퍼 + #root)에서는
+      #main-content에 해당한다. 패딩(고정 헤더 높이)과 가로 넘침 차단이 함께 필요하다. */
+#main-content {
+  padding-top: var(--atelier-header-height);
+  overflow-x: clip;
+}
+
+/* 2) Astryx SegmentedControlItem(v0.7.16)는 className을 DOM에 전달하지 않으므로
+      #arcana-filter 자식 규칙으로 기존 필터의 시각(토큰·색·상태)을 재현한다. */
+#arcana-filter [role='radio'] {
+  padding: 4px 16px;
+  border: 0;
+  border-radius: 0.25rem;
+  font-family: inherit;
+  font-size: 11px;
+  line-height: 14px;
+  letter-spacing: 0.06em;
+  font-weight: 500;
+  color: var(--atelier-ink, #45464e);
+  transition: all 0.15s;
+}
+
+#arcana-filter [role='radio']:hover {
+  color: #191c1f;
+  background-color: #edeef2;
+}
+
+#arcana-filter [role='radio'][aria-checked='true'] {
+  background-color: var(--atelier-navy, #081230);
+  color: #fff;
+  font-weight: 700;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+#arcana-filter [role='radio'][aria-checked='true']:hover {
+  background-color: var(--atelier-navy, #081230);
+  color: #fff;
+}
+
+@media (max-width: 640px) {
+  #arcana-filter [role='radio'] {
+    padding-inline: 0.65rem;
+  }
+}
+
+/* 3) Astryx Badge는 높이 20px을 고정해 기존 배지(내용 높이 18px)와 달라진다.
+      내용 크기로 돌아오도록 한다. */
+#root .astryx-badge {
+  height: auto;
+}
+
+/* 4) Astryx Button의 white-space: nowrap과 고정 height가 좁은 화면에서
+      라벨을 버튼 밖으로 넘치게 한다(390px에서 17px 겹침·세로 잘림 위험).
+      기존 정적 페이지와같이 자연 줄바꿈과 내용 높이를 허용한다. */
+#root .astryx-button {
+  white-space: normal;
+  height: auto;
+}
