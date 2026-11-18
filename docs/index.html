@@ -613,6 +613,35 @@
 </section>
 </div>
 <script>
+  const sectionNav = document.querySelector('nav[data-active-classes]');
+  const navLinks = Array.from(sectionNav.querySelectorAll('a[href^="#"]'));
+  const navSections = navLinks.map(link => document.getElementById(link.hash.slice(1)));
+  const activeClasses = sectionNav.dataset.activeClasses.split(' ');
+
+  function updateSectionNav() {
+    const headerBottom = sectionNav.closest('header').getBoundingClientRect().bottom;
+    let current = 0;
+    navSections.forEach((section, index) => {
+      if (section && section.getBoundingClientRect().top <= headerBottom + 32) current = index;
+    });
+    const page = document.scrollingElement;
+    if (page.scrollHeight > page.clientHeight && page.scrollHeight - page.scrollTop - page.clientHeight <= 2) {
+      current = navLinks.length - 1;
+    }
+    navLinks.forEach((link, index) => {
+      const active = index === current;
+      activeClasses.forEach(name => link.classList.toggle(name, active));
+      link.classList.toggle('text-on-surface-variant', !active);
+      if (active) link.setAttribute('aria-current', 'location');
+      else link.removeAttribute('aria-current');
+    });
+  }
+
+  window.addEventListener('scroll', updateSectionNav, { passive: true });
+  window.addEventListener('resize', updateSectionNav);
+  window.addEventListener('pageshow', updateSectionNav);
+  updateSectionNav();
+
   const filters = document.querySelectorAll('[data-filter]');
   const cards = document.querySelectorAll('[data-arcana]');
   filters.forEach(button => {
