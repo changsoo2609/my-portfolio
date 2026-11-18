@@ -20,3 +20,52 @@
 .pf-chat-links{padding:0 16px 12px;display:flex;flex-wrap:wrap;gap:8px}
 .pf-chat-links a{font-size:11px;color:#1b3bff;text-decoration:underline}
 @media(max-width:520px){#pf-chat-launcher{right:13px;bottom:13px}#pf-chat{right:14px;bottom:74px;max-height:calc(100dvh - 92px)}#pf-chat-messages{min-height:96px}.pf-chat-quick{gap:6px;padding-bottom:8px}.pf-chat-quick button{font-size:11px;padding:7px 6px}}
+
+/* Portfolio Q/A theme */
+#pf-chat-launcher {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  padding: 0;
+  border: 2px solid #f2d775;
+  background: conic-gradient(from 215deg, #b68a2c, #f7e7a5, #d4af37, #fff0b3, #a87920, #b68a2c);
+  color: #1e2746;
+  font: 700 17px Inter, system-ui, sans-serif;
+  text-shadow: 0 1px #fff2bd;
+  box-shadow: inset 0 0 0 4px #b98d32, 0 7px 20px #1e274633;
+}
+#pf-chat-launcher:hover { filter: brightness(1.08); }
+#pf-chat-launcher:focus-visible,
+#pf-chat button:focus-visible,
+#pf-chat textarea:focus-visible { outline-color: #b68a2c; }
+#pf-chat {
+  bottom: 100px;
+  max-height: min(650px, calc(100dvh - 116px));
+  background: #f6f7fb;
+  border: 1px solid #d4af37;
+  border-radius: 26px;
+  color: #1e2746;
+  font-family: Inter, system-ui, sans-serif;
+}
+.pf-chat-header {
+  background: linear-gradient(135deg, #1e2746, #303c61);
+  color: #fff;
+  border-bottom: 2px solid #d4af37;
+  padding: 16px 18px;
+}
+.pf-chat-header strong { color: #f8e5a3; }
+.pf-chat-header p { color: #e1e5ef; }
+.pf-chat-close { color: #f8e5a3; border-radius: 50%; }
+.pf-bubble { background: #fff; border-radius: 18px 18px 18px 6px; }
+.pf-bubble.user { background: #eee5c6; border-radius: 18px 18px 6px 18px; }
+.pf-chat-quick button { border-color: #d8c791; color: #1e2746; border-radius: 16px; }
+.pf-chat-quick button:hover { background: #f5ecd0; }
+.pf-chat-form { border-color: #e0d5b4; }
+#pf-chat-question { background: #fff; border-color: #d8c791; border-radius: 16px; }
+.pf-chat-form button[type=submit] { background: #1e2746; color: #fff0bc; border-radius: 999px; }
+.pf-chat-links a { color: #1e2746; }
+@media (max-width: 520px) {
+  #pf-chat-launcher { width: 56px; height: 56px; font-size: 15px; }
+  #pf-chat { bottom: 82px; max-height: calc(100dvh - 94px); }
+}
