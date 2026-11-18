@@ -663,10 +663,12 @@
   updateSectionNav();
 
   const filters = document.querySelectorAll('[data-filter]');
+  const projectGrid = document.getElementById('arcana-grid');
   const cards = document.querySelectorAll('[data-arcana]');
   filters.forEach(button => {
     button.setAttribute('aria-pressed', String(button.dataset.filter === 'all'));
     button.addEventListener('click', () => {
+      projectGrid.classList.toggle('lg:grid-cols-2', button.dataset.filter === 'all');
       filters.forEach(filter => {
         const selected = filter === button;
         filter.setAttribute('aria-pressed', String(selected));
