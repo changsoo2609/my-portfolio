@@ -2,9 +2,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"error":"#ba1a1a","primary":"#081230","primary-fixed-dim":"#bcc5ec","secondary":"#735c00","surface-container-low":"#f2f3f7","on-primary":"#ffffff","error-container":"#ffdad6","surface-container-highest":"#e1e2e6","on-tertiary-fixed-variant":"#48349d","tertiary-container":"#29087f","secondary-fixed-dim":"#e9c349","on-surface":"#191c1f","tertiary-fixed-dim":"#cabeff","surface-bright":"#f8f9fd","on-primary-fixed-variant":"#3d4566","on-tertiary-container":"#9280ed","on-error-container":"#93000a","surface-variant":"#e1e2e6","surface-container-high":"#e7e8ec","primary-fixed":"#dce1ff","outline":"#76767e","on-secondary-container":"#745c00","primary-container":"#1e2746","on-secondary-fixed":"#241a00","on-surface-variant":"#45464e","surface-container-lowest":"#ffffff","on-primary-container":"#868eb3","on-tertiary":"#ffffff","on-tertiary-fixed":"#1c0062","surface-container":"#edeef2","outline-variant":"#c6c6ce","tertiary-fixed":"#e6deff","secondary-fixed":"#ffe088","on-secondary":"#ffffff","secondary-container":"#fed65b","on-error":"#ffffff","tertiary":"#14004e","inverse-surface":"#2e3134","on-background":"#191c1f","on-secondary-fixed-variant":"#574500","inverse-on-surface":"#eff1f5","surface-dim":"#d9dade","background":"#f8f9fd","on-primary-fixed":"#101a38","surface":"#f8f9fd","surface-tint":"#545d7f","inverse-primary":"#bcc5ec"},"borderRadius":{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},"spacing":{"space-xs":"0.25rem","margin":"3rem","space-sm":"0.5rem","margin-mobile":"1.25rem","space-lg":"1.5rem","gutter":"1.5rem","gutter-mobile":"1rem","space-xl":"2.5rem","space-md":"1rem"},"fontFamily":{"label-sm":["Inter"],"headline-md":["EB Garamond"],"tarot-title":["EB Garamond"],"display-lg":["EB Garamond"],"display-lg-mobile":["EB Garamond"],"title-lg":["Inter"],"headline-lg":["EB Garamond"],"headline-xl":["EB Garamond"],"title-md":["Inter"],"body-md":["Inter"],"body-sm":["Inter"],"body-lg":["Inter"],"label-md":["Inter"],"headline-xl-mobile":["EB Garamond"]},"fontSize":{"label-sm":["11px",{"lineHeight":"14px","letterSpacing":"0.06em","fontWeight":"500"}],"headline-md":["24px",{"lineHeight":"32px","fontWeight":"500"}],"tarot-title":["18px",{"lineHeight":"22px","letterSpacing":"0.12em","fontWeight":"600"}],"display-lg":["56px",{"lineHeight":"64px","letterSpacing":"-0.01em","fontWeight":"400"}],"display-lg-mobile":["36px",{"lineHeight":"44px","letterSpacing":"0","fontWeight":"400"}],"title-lg":["20px",{"lineHeight":"28px","fontWeight":"600"}],"headline-lg":["32px",{"lineHeight":"40px","fontWeight":"500"}],"headline-xl":["40px",{"lineHeight":"48px","letterSpacing":"0","fontWeight":"400"}],"title-md":["16px",{"lineHeight":"24px","letterSpacing":"0.01em","fontWeight":"600"}],"body-md":["14px",{"lineHeight":"22px","fontWeight":"400"}],"body-sm":["12px",{"lineHeight":"18px","fontWeight":"400"}],"body-lg":["16px",{"lineHeight":"26px","fontWeight":"400"}],"label-md":["12px",{"lineHeight":"16px","letterSpacing":"0.08em","fontWeight":"600"}],"headline-xl-mobile":["28px",{"lineHeight":"36px","letterSpacing":"0","fontWeight":"400"}]}}}}</script><link rel="stylesheet" href="./chatbot-widget.css?v=gold-lid-large"><style>
   #home {
     isolation: isolate;
-    padding-top: calc(var(--hero-top-space, 3rem) + clamp(12px, 2vw, 28px));
+    padding-block: clamp(4rem, 8vw, 7rem) clamp(3.5rem, 7vw, 6rem);
   }
-  #home h1, #home h1 + p { translate: 0 clamp(10px, 1.5vw, 18px); }
   #home::before,
   #home::after {
     content: "";
@@ -12,20 +11,35 @@
     z-index: -1;
     inset: 0;
     pointer-events: none;
-    background: url("./hero-orbits.png") right center / auto 112% no-repeat;
-    mask-image:
-      linear-gradient(90deg, transparent 52%, #000 91%),
-      linear-gradient(0deg, transparent, #000 24%, #000 85%, transparent);
-    mask-composite: intersect;
-    opacity: .65;
+  }
+  #home::before {
+    background:
+      radial-gradient(ellipse at 12% 42%, #e6d39a80, transparent 39%),
+      radial-gradient(ellipse at 84% 32%, #c3cfea80, transparent 43%),
+      radial-gradient(ellipse at 63% 62%, #e1d9f06b, transparent 50%),
+      radial-gradient(ellipse at 38% 20%, #f2e7bd80, transparent 43%);
+    mask-image: linear-gradient(transparent, #000 18%, #000 65%, transparent 96%);
   }
   #home::after {
-    transform: scaleX(-1);
-    opacity: .55;
+    background:
+      linear-gradient(#1e274609 1px, transparent 1px),
+      linear-gradient(90deg, #1e274609 1px, transparent 1px);
+    background-size: 28px 28px;
+    mask-image: radial-gradient(ellipse at 50% 42%, #000 20%, transparent 72%);
+  }
+  #home .hero-actions { margin-bottom: clamp(2rem, 5vw, 4rem); }
+  #home .hero-actions a { border-radius: .85rem; }
+  #home .hero-award {
+    order: 1;
+    margin-bottom: 0;
+    border: 1px solid #1e274615;
+    border-radius: 1.25rem;
+    background: #fffffff0;
+    box-shadow: 0 8px 26px #1e274610;
   }
   @media (max-width: 640px) {
-    #home { --hero-top-space: 2.5rem; }
-    #home::before, #home::after { opacity: .35; background-size: auto 85%; }
+    #home { padding-block: 3rem 3.5rem; }
+    #home .hero-award .shrink-0:last-child { flex-wrap: wrap; justify-content: center; }
   }
 </style></head><body class="bg-surface font-body-md text-on-surface antialiased selection:bg-secondary-container selection:text-on-secondary-container" style="word-break: keep-all; overflow-wrap: break-word; letter-spacing: -0.012em; line-height: 1.7;"><header class="fixed top-0 left-0 w-full z-50 bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(8,18,48,0.04)]"><div class="h-20 max-w-[1440px] mx-auto px-margin-mobile lg:px-margin flex items-center justify-between gap-space-md"><div class="flex flex-col"><a class="group flex flex-col" data-path="overview" href="#home"><span class="font-tarot-title text-tarot-title text-primary tracking-widest transition-colors">CHANGSOO HAN <span class="text-secondary font-light opacity-60 font-body-sm">//</span> PORTFOLIO</span><span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mt-space-xs">Junior Backend &amp; Full-Stack Engineer</span></a></div><nav class="hidden xl:flex items-center gap-space-xs" data-active-classes="bg-primary-container text-on-primary font-bold rounded-lg shadow-sm"><a aria-current="page" class="px-space-sm py-space-xs rounded font-label-md text-label-md hover:text-on-surface hover:bg-surface-container transition-all bg-primary-container text-on-primary font-bold rounded-lg shadow-sm" data-path="overview" href="#home">01. INTRO</a><a class="px-space-sm py-space-xs rounded font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" data-path="core-projects" href="#major-arcana-plates">02. PROJECTS</a><a class="px-space-sm py-space-xs rounded font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" data-path="observatory" href="#research">03. RESEARCH</a><a class="px-space-sm py-space-xs rounded font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" data-path="tech-stack" href="#skills">04. TECH STACK</a><a class="px-space-sm py-space-xs rounded font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" data-path="contact" href="#celestial-dispatch">05. CONTACT</a></nav><div class="flex items-center gap-space-sm"><a class="hidden sm:inline-flex items-center px-space-sm py-space-xs rounded font-label-sm text-label-sm text-primary hover:bg-surface-container transition-all" href="https://github.com/changsoo2609" rel="noopener noreferrer" target="_blank">GitHub ↗</a><a class="inline-flex items-center px-space-md py-space-xs rounded bg-primary text-on-primary font-label-sm text-label-sm shadow-[0_0_12px_rgba(233,195,73,0.18)] hover:bg-primary-container transition-all" data-path="contact" href="#celestial-dispatch">이력서 / 제안</a><a href="#celestial-dispatch" aria-label="연락처" class="w-8 h-8 rounded-full bg-primary flex items-center justify-center ml-space-xs shadow-inner"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></a></div></div></header><main class="w-full pt-20 bg-surface min-h-[calc(100vh-80px)]"><div class="flex flex-col w-full relative">
 <!-- Celestial Ambient Constellation Backdrop Layer -->
@@ -58,7 +72,7 @@
         오차 없이 실체화하는 주니어 엔지니어 <span class="font-title-md text-primary font-semibold">한창수(Changsoo Han)</span>입니다.
       </p>
 <!-- Royal Award Medallion / Verification Seal -->
-<div class="w-full bg-surface-container-lowest rounded-xl p-space-lg shadow-xl relative overflow-hidden mb-space-xl flex flex-col md:flex-row items-center justify-between gap-space-md text-left">
+<div class="hero-award w-full bg-surface-container-lowest rounded-xl p-space-lg shadow-xl relative overflow-hidden mb-space-xl flex flex-col md:flex-row items-center justify-between gap-space-md text-left">
 <div class="absolute -right-8 -bottom-8 opacity-5 text-primary pointer-events-none select-none">
 <span class="material-symbols-outlined text-[140px]">workspace_premium</span>
 </div>
@@ -97,7 +111,7 @@
 </div>
 </div>
 <!-- Action Constellation -->
-<div class="flex flex-wrap items-center justify-center gap-space-md">
+<div class="hero-actions flex flex-wrap items-center justify-center gap-space-md">
 <a class="inline-flex items-center gap-space-xs px-space-lg py-space-sm rounded-lg bg-primary text-on-primary font-title-md text-title-md shadow-lg hover:bg-primary-container transition-all" href="#major-arcana-plates"><span class="material-symbols-outlined text-[18px]">verified</span><span>대표 프로젝트 4선 보기 ↓</span></a>
 <a class="inline-flex items-center gap-space-xs px-space-lg py-space-sm rounded-lg bg-surface-container-lowest text-primary font-title-md text-title-md shadow hover:bg-surface-container transition-all" href="#celestial-dispatch"><span class="material-symbols-outlined text-[18px]">mail</span><span>서신 연락 및 제안</span></a>
 <a class="inline-flex items-center gap-space-xs px-space-md py-space-sm rounded-lg bg-surface-container-low text-on-surface-variant hover:text-primary font-label-md text-label-md transition-all" href="https://github.com/changsoo2609" rel="noopener noreferrer" target="_blank">
