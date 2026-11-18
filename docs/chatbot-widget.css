@@ -14,6 +14,7 @@
   cursor: pointer;
 }
 #pf-chat-launcher:hover { background: #f8ebbd; }
+.pf-launcher-short { display: none; }
 #pf-chat-launcher[hidden], #pf-chat[hidden] { display: none !important; }
 #pf-chat-launcher:focus-visible, #pf-chat :is(a, button, textarea):focus-visible {
   outline: 3px solid #29478b;
@@ -126,8 +127,24 @@
 .pf-chat-links a { display: inline-flex; align-items: center; min-height: 32px; }
 #pf-chat a { color: #253f78; text-decoration: underline; text-underline-offset: .2em; }
 #pf-chat a:hover { color: #735c00; }
+@media (max-width: 540px) {
+  #pf-chat-launcher {
+    position: static;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    min-height: 44px;
+    padding: 0 4px;
+    border-radius: 8px;
+    box-shadow: none;
+    font-size: 13px;
+  }
+  #pf-chat-launcher[hidden] { display: inline-flex !important; visibility: hidden; }
+  .pf-launcher-long { display: none; }
+  .pf-launcher-short { display: inline; }
+}
 @media (max-width: 520px) {
-  #pf-chat-launcher { padding-inline: 12px; font-size: 13px; }
   #pf-chat {
     right: max(10px, env(safe-area-inset-right));
     bottom: max(10px, env(safe-area-inset-bottom));

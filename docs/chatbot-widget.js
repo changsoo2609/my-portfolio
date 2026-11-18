@@ -19,7 +19,7 @@
       answer: '해빛에서 HTML·CSS·JavaScript로 부모·아이 화면, 미션 인증 UI, 보상과 펫 화면을 구현했습니다.',
     },
     {
-      name: 'ClassFlowAI', url: '#major-arcana-plates',
+      name: 'ClassFlowAI', url: '#project-classflow',
       terms: ['classflow', '클래스플로우', '클래스 플로우'],
       answer: 'ClassFlowAI는 Windows 화면을 OCR·CAP으로 기록하고 수업 요약, 영어 학습 자료와 복습 데이터를 만드는 개인 프로젝트입니다.',
     },
@@ -30,9 +30,10 @@
     if (text) el.textContent = text;
     return el;
   };
-  const launcher = make('button', '', '포트폴리오 질문');
+  const launcher = make('button');
   launcher.id = 'pf-chat-launcher';
   launcher.type = 'button';
+  launcher.append(make('span', 'pf-launcher-long', '포트폴리오 질문'), make('span', 'pf-launcher-short', '질문'));
   launcher.setAttribute('aria-controls', 'pf-chat');
   launcher.setAttribute('aria-expanded', 'false');
   const panel = make('section');
@@ -86,7 +87,9 @@
       link.target = '_blank';
       link.rel = 'noopener noreferrer';
     } else {
-      link.addEventListener('click', () => toggle(false));
+      link.addEventListener('click', event => {
+        if (!(event.ctrlKey || event.metaKey || event.shiftKey || event.altKey)) toggle(false, false);
+      });
     }
     return link;
   }
@@ -96,7 +99,8 @@
     links.append(projectLink(project));
   });
   panel.append(header, messages, quick, form, links);
-  document.body.append(panel, launcher);
+  (document.querySelector('.site-nav') || document.body).append(launcher);
+  document.body.append(panel);
 
   let widgetId = null;
   let busy = false;
@@ -144,7 +148,7 @@
     document.head.append(script);
   }
 
-  function toggle(open) {
+  function toggle(open, restoreFocus = true) {
     panel.hidden = !open;
     launcher.hidden = open;
     launcher.setAttribute('aria-expanded', String(open));
@@ -152,7 +156,7 @@
       loadTurnstile();
       if (window.matchMedia('(pointer: coarse)').matches) close.focus();
       else question.focus();
-    } else {
+    } else if (restoreFocus) {
       launcher.focus();
     }
   }
