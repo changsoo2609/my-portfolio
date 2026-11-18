@@ -52,9 +52,9 @@
   question.placeholder = '예: 밭머리에서 어떤 백엔드 기능을 만들었나요?';
   const captcha = make('div');
   captcha.id = 'pf-chat-turnstile';
-  const submit = make('button', '', enabled ? 'AI에게 질문하기' : '질문 예시 보기');
+  const submit = make('button', '', enabled ? 'AI에게 질문하기' : '질문하기');
   submit.type = 'submit';
-  const status = make('span', '', enabled ? '봇 검증을 완료하면 질문을 보낼 수 있습니다.' : 'AI 서버 미연결 · 미리 준비한 질문만 볼 수 있습니다.');
+  const status = make('span', '', enabled ? '봇 검증을 완료하면 질문을 보낼 수 있습니다.' : '포트폴리오에 관한 질문에 준비된 답변으로 안내합니다.');
   status.id = 'pf-chat-status';
   form.append(label, question, captcha, submit, status);
   const links = make('div', 'pf-chat-links');
@@ -80,7 +80,21 @@
     messages.scrollTop = messages.scrollHeight;
     return div;
   };
-  write(enabled ? '안녕하세요. 공개된 프로젝트 소개를 바탕으로 답변합니다. 비밀번호나 개인정보는 입력하지 마세요.' : '현재 AI 서버가 연결되지 않았습니다. 아래 예시 질문을 선택하면 준비된 프로젝트 소개를 확인할 수 있습니다.');
+  write(enabled ? '안녕하세요. 공개된 프로젝트 소개를 바탕으로 답변합니다. 비밀번호나 개인정보는 입력하지 마세요.' : '안녕하세요. 프로젝트, 담당 역할, 기술 경험에 대해 질문해 주세요. 준비된 내용을 바탕으로 안내합니다.');
+  const localAnswers = [
+    { words: ['classflow', '클래스플로우', '클래스 플로우'], answer: 'ClassFlowAI는 개인 프로젝트입니다. 웹 화면과 Agent, 인증 및 학습 기능을 연동했습니다. 자세한 내용은 포트폴리오의 ClassFlowAI 소개를 확인해 주세요.' },
+    { words: ['밭머리', 'batmeori', '솔버톤', '최우수', '수상'], answer: offlineAnswers[1] },
+    { words: ['genmark', '젠마크', '젠 마크'], answer: offlineAnswers[2] },
+    { words: ['해빛', 'haebit', '펫', '부모', '아이'], answer: offlineAnswers[3] },
+    { words: ['프론트', 'frontend', 'front-end', '화면', 'ui'], answer: offlineAnswers[3] },
+    { words: ['풀스택', 'fullstack', 'full-stack', '경험', '프로젝트'], answer: offlineAnswers[0] },
+    { words: ['백엔드', 'backend', 'back-end', '서버', 'api', '데이터베이스', 'db'], answer: 'GenMark AI에서는 Spring Boot와 MariaDB를, 밭머리에서는 FastAPI와 Supabase를 활용한 백엔드 개발에 참여했습니다.' },
+  ];
+  function answerLocally(text) {
+    const normalized = text.toLowerCase();
+    const match = localAnswers.find(item => item.words.some(word => normalized.includes(word)));
+    return match ? match.answer : '해당 질문에 대한 준비된 답변을 찾지 못했습니다. ClassFlowAI, 밭머리, GenMark AI, 해빛 또는 프론트엔드·백엔드 경험에 대해 질문해 주세요.';
+  }
   quickQuestions.forEach((q, i) => {
     const button = make('button', '', q);
     button.type = 'button';
@@ -138,7 +152,10 @@
     const text = question.value.trim();
     if (!text) return;
     if (!enabled) {
-      status.textContent = 'AI 서버 미연결 상태에서는 위의 추천 질문만 사용할 수 있습니다.';
+      write(text, 'user');
+      write(answerLocally(text));
+      question.value = '';
+      status.textContent = '포트폴리오의 준비된 내용을 바탕으로 안내했습니다.';
       return;
     }
     const token = widgetId !== null ? window.turnstile?.getResponse(widgetId) : '';
