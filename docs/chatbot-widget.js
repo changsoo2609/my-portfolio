@@ -50,6 +50,13 @@
   question.maxLength = 400;
   question.required = true;
   question.placeholder = '예: 밭머리에서 어떤 백엔드 기능을 만들었나요?';
+  question.addEventListener('keydown', event => {
+    if (event.key === 'Enter' && !event.shiftKey && !event.isComposing) {
+      event.preventDefault();
+      if (typeof form.requestSubmit === 'function') form.requestSubmit();
+      else submit.click();
+    }
+  });
   const captcha = make('div');
   captcha.id = 'pf-chat-turnstile';
   const submit = make('button', '', enabled ? 'AI에게 질문하기' : '질문하기');
@@ -123,6 +130,7 @@
         action: 'portfolio_chat',
         theme: 'light',
         size: 'normal',
+        appearance: 'interaction-only',
       });
     };
     script.onerror = () => { status.textContent = '봇 검증 모듈을 불러오지 못했습니다.'; };
