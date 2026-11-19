@@ -124,3 +124,37 @@
 .atelier-card:focus-within {
   box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
 }
+
+/*
+ * 6) PILLAR 카드를 훑고 지나가는 빛줄기 — 4장이 1.5초 간격으로 순서대로 돈다.
+ *    celestial-sweep와 같은 background-position 방식을 쓴다(의존성 없음).
+ */
+.pillar-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.pillar-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(110deg, transparent 38%, rgba(233, 195, 73, 0.28) 49%, transparent 60%);
+  background-size: 240% 100%;
+  background-position: 100% 0;
+  opacity: 0;
+  animation: pillar-sweep 6s ease-in-out infinite;
+  animation-delay: var(--pillar-delay, 0s);
+}
+
+@keyframes pillar-sweep {
+  0% { background-position: 100% 0; opacity: 0; }
+  2% { opacity: 1; }
+  18% { opacity: 1; }
+  20% { background-position: 0 0; opacity: 0; }
+  100% { background-position: 0 0; opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pillar-card::after { animation: none; opacity: 0; }
+}

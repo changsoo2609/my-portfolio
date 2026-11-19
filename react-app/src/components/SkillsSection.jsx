@@ -75,7 +75,8 @@ export default function SkillsSection() {
               viewport={{ once: true, amount: 0.1 }}
               transition={{ duration: 0.5, delay: reduced ? 0 : index * 0.06, ease: [0.16, 1, 0.3, 1] }}
               key={pillar.tag}
-              className="bg-surface-container-lowest rounded-xl p-space-lg shadow-md flex flex-col justify-between"
+              className="pillar-card bg-surface-container-lowest rounded-xl p-space-lg shadow-md flex flex-col justify-between"
+              style={{ '--pillar-delay': `${index * 1.5}s` }}
             >
               <div>
                 <div className="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-primary mb-space-md">
