@@ -70,10 +70,10 @@ export default function SkillsSection() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-space-md">
           {PILLARS.map((pillar, index) => (
             <motion.div
-              initial={reduced ? false : { opacity: 0.55, y: mobile ? 24 : 30 }}
+              initial={reduced ? false : { opacity: 0.55, y: mobile ? 12 : 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.1 }}
-              transition={{ duration: 0.7, delay: reduced ? 0 : index * 0.1, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.5, delay: reduced ? 0 : index * 0.06, ease: [0.16, 1, 0.3, 1] }}
               key={pillar.tag}
               className="bg-surface-container-lowest rounded-xl p-space-lg shadow-md flex flex-col justify-between"
             >

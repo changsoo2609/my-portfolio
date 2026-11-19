@@ -93,3 +93,34 @@
 @media (prefers-reduced-motion: reduce) {
   .celestial-heading::after { animation: none; opacity: 0; }
 }
+
+/*
+ * 5) 카드 인터랙션 — 반응형 포인터 대응
+ * - hover(리프트·그림자·장식 확대·제목 색)는 정밀 포인터에서만 적용해
+ *   터치에서잔류하는 hover-only 기울기·조명을 제거한다.
+ * - 카드 리프트(y 이동)는 ProjectCard의 whileHover가 동일 조건부로 처리한다.
+ * - 터치에서는 Astryx 버튼/세그먼트의 press 피드백만 남는다.
+ * - 포커스 피드백은 포인터와 무관하게 유지한다.
+ */
+.arcana-card__deco {
+  transition: transform 180ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .arcana-card:hover {
+    box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+  }
+  .arcana-card:hover .arcana-card__deco {
+    transform: scale(1.1);
+  }
+  .arcana-card:hover h3 {
+    color: var(--atelier-gold, #735c00);
+  }
+  #celestial-dispatch .atelier-card:hover {
+    background-color: var(--atelier-chip, #edeef2);
+  }
+}
+
+.atelier-card:focus-within {
+  box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+}

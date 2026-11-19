@@ -48,9 +48,11 @@ html:has(.hero-intro[open]) { overflow: hidden; }
   color: #fff8e8;
   background: transparent;
   overflow: hidden;
+  /* 성능: 인트로의 레이아웃 범위를 격리해 씬 전환의 스타일/레이아웃 무효화를 줄인다 (시각 동일). */
+  contain: layout;
 }
 .hero-intro::backdrop { background: transparent; }
-.hero-intro__scene { position: absolute; inset: 0; isolation: isolate; }
+.hero-intro__scene { position: absolute; inset: 0; isolation: isolate; contain: layout paint; }
 .hero-intro__center {
   position: absolute;
   inset: 0;
@@ -84,7 +86,7 @@ html:has(.hero-intro[open]) { overflow: hidden; }
   font-variant-numeric: tabular-nums;
   perspective: 800px;
 }
-.hero-intro__slot { position: relative; height: 1.03em; overflow: hidden; }
+.hero-intro__slot { position: relative; height: 1.03em; overflow: hidden; contain: layout paint; }
 .hero-intro__slot span { position: absolute; inset: 0; display: grid; place-items: center; }
 .hero-intro__slot:nth-child(2) span {
   color: var(--intro-accent);

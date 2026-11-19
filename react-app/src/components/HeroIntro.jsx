@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef, useState } from 'react';
+import { memo, useLayoutEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 
 const scenes = [
@@ -15,6 +15,13 @@ const digitShapes = [
   { y: '36%', scaleY: 1.4, skewX: -8, clipPath: 'inset(44% 0 0 0)' },
 ];
 
+// 정적 상수(인덱스 무관) — 씬 전환마다 재렌더되지 않도록 메모이즈한다.
+const IntroName = memo(function IntroName() {
+  return (
+    <div className="hero-intro__name" aria-hidden="true">CHANGSOO HAN <span> / </span> PORTFOLIO</div>
+  );
+});
+
 export default function HeroIntro({ onFinish, onReveal }) {
   const dialogRef = useRef(null);
   const skipRef = useRef(null);
@@ -29,7 +36,8 @@ export default function HeroIntro({ onFinish, onReveal }) {
       return;
     }
     dialog.showModal();
-    skipRef.current.focus();
+    // preventScroll: 인트로 중 강제 스크롤/레이아웃 재계산을 막는다.
+    skipRef.current.focus({ preventScroll: true });
     const timers = scenes.slice(1).map(({ at }, i) => setTimeout(() => setIndex(i + 1), at));
     timers.push(setTimeout(() => { setRevealing(true); onReveal(); }, 2990), setTimeout(onFinish, duration));
     return () => {
@@ -63,7 +71,7 @@ export default function HeroIntro({ onFinish, onReveal }) {
           initial={{ scaleX: 0 }} animate={{ scaleX: [0, 0.26, 0.59, 1][index] }}
           transition={{ duration: 0.55, ease }}
         />
-        <div className="hero-intro__name" aria-hidden="true">CHANGSOO HAN <span> / </span> PORTFOLIO</div>
+        <IntroName />
         <div className="hero-intro__center">
           <div className="hero-intro__digits" aria-hidden="true" data-code={scene.code}>
             {scene.code.split('').map((digit, slot) => (

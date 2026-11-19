@@ -52,7 +52,7 @@ export default function ContactSection() {
           {/* Direct Contact Elements */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-space-md mb-space-xl">
             {/* Email Box with Copy Feature */}
-            <div className="atelier-card p-space-lg bg-surface-container-low rounded-xl flex flex-col justify-between group hover:bg-surface-container">
+            <div className="atelier-card p-space-lg bg-surface-container-low rounded-xl flex flex-col justify-between">
               <div>
                 <div className="flex items-center justify-between text-on-surface-variant mb-1">
                   <span className="font-label-sm text-label-sm uppercase tracking-wider">DIRECT EMAIL</span>
@@ -81,7 +81,7 @@ export default function ContactSection() {
               </p>
             </div>
             {/* GitHub Channel */}
-            <div className="atelier-card p-space-lg bg-surface-container-low rounded-xl flex flex-col justify-between group hover:bg-surface-container">
+            <div className="atelier-card p-space-lg bg-surface-container-low rounded-xl flex flex-col justify-between">
               <div>
                 <div className="flex items-center justify-between text-on-surface-variant mb-1">
                   <span className="font-label-sm text-label-sm uppercase tracking-wider">

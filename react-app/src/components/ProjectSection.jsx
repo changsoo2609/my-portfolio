@@ -29,6 +29,9 @@ export default function ProjectSection({ projectFilterScrollRef }) {
   const selectedLabel = FILTERS.find((f) => f.value === filter)?.label ?? '';
   const status =
     filter === 'all' ? '전체 프로젝트 4개 표시' : `${selectedLabel} 프로젝트 표시`;
+  const visibleProjects = projects.filter(
+    (project) => filter === 'all' || filter === project.key,
+  );
 
   return (
     <section className="w-full bg-surface-container-low/60 py-24 scroll-mt-20" id="major-arcana-plates">
@@ -51,24 +54,20 @@ export default function ProjectSection({ projectFilterScrollRef }) {
         <p id="project-status" className="sr-only" role="status">
           {status}
         </p>
-        {/* Constellation Deck Grid */}
-        <AnimatePresence mode="wait" initial={false}>
+        {/* Constellation Deck Grid — 카드 유지 렌더 + layout 애니메이션으로
+            추가·제거·재배치를 연결한다 (기존 전체 리마운트 방식 폐기). */}
         <motion.div
-          key={filter}
-          exit={reduced ? undefined : { opacity: 0, transition: { duration: 0.16 } }}
+          layout={!reduced}
+          transition={{ layout: { duration: 0.35, ease: [0.16, 1, 0.3, 1] } }}
           className={`grid grid-cols-1 gap-space-lg ${filter === 'all' ? 'lg:grid-cols-2' : ''}`}
           id="arcana-grid"
         >
-          {projects.map((project, index) => (
-            <ProjectCard
-              key={`${project.key}-${filter}`}
-              index={index}
-              project={project}
-              visible={filter === 'all' || filter === project.key}
-            />
-          ))}
+          <AnimatePresence initial={false} mode={reduced ? undefined : 'popLayout'}>
+            {visibleProjects.map((project, index) => (
+              <ProjectCard key={project.key} index={index} project={project} />
+            ))}
+          </AnimatePresence>
         </motion.div>
-        </AnimatePresence>
       </div>
     </section>
   );
