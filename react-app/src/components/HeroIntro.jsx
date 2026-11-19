@@ -9,10 +9,11 @@ const scenes = [
 ];
 const duration = 3650;
 const ease = [0.22, 1, 0.36, 1];
+// clipPath·y 이동을 쓰지 않는다: 슬롯의 overflow:hidden이 윗부분을 잘라내 "숫자가 비었다가 윗부분이 생기는" 깜빡임을 만든다.
 const digitShapes = [
-  { y: '46%', scaleY: 1.64, skewX: -9, clipPath: 'inset(56% 0 0 0)' },
-  { y: '-40%', scaleY: 0.3, skewX: 7, clipPath: 'inset(0 0 52% 0)' },
-  { y: '36%', scaleY: 1.4, skewX: -8, clipPath: 'inset(44% 0 0 0)' },
+  { scaleY: 1.35, skewX: -9 },
+  { scaleY: 0.35, skewX: 7 },
+  { scaleY: 1.3, skewX: -8 },
 ];
 
 // 정적 상수(인덱스 무관) — 씬 전환마다 재렌더되지 않도록 메모이즈한다.
@@ -78,8 +79,8 @@ export default function HeroIntro({ onFinish, onReveal }) {
               <div className="hero-intro__slot" key={slot}>
                 <motion.span
                   key={digit}
-                  initial={{ ...digitShapes[slot], opacity: 0 }}
-                  animate={{ y: 0, scaleY: 1, skewX: 0, clipPath: 'inset(0% 0 0% 0)', opacity: 1 }}
+                  initial={digitShapes[slot]}
+                  animate={{ scaleY: 1, skewX: 0 }}
                   transition={{ duration: 0.51, delay: slot * 0.055, ease }}
                 >{digit}</motion.span>
               </div>
