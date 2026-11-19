@@ -4,7 +4,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "predev": "tailwindcss -i ./src/tailwind.css -o ./public/tailwind.css --minify",
     "dev": "vite",
+    "prebuild": "tailwindcss -i ./src/tailwind.css -o ./public/tailwind.css --minify",
     "build": "vite build",
     "preview": "vite preview",
     "astryx": "node node_modules/@astryxdesign/cli/clients/cli/bin/astryx.mjs"
@@ -20,6 +22,7 @@
   "devDependencies": {
     "@astryxdesign/cli": "^0.7.16",
     "@vitejs/plugin-react": "^6.3.0",
+    "tailwindcss": "^3.4.19",
     "vite": "^8.3.8"
   }
 }

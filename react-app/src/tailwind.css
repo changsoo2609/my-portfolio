@@ -1,0 +1,5 @@
+/* 빌드타임 Tailwind — 기존 cdn.tailwindcss.com의 런타임 컴파일을 대체한다.
+   순서는 원본과 동일하게 base → components → utilities. */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
