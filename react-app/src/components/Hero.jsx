@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { motion, useReducedMotion } from 'motion/react';
 import { Button } from '@astryxdesign/core/Button';
 import AwardHighlight from './AwardHighlight.jsx';
@@ -11,6 +11,10 @@ const icon = (name, size) => (
     {name}
   </span>
 );
+
+function isReload() {
+  return performance.getEntriesByType('navigation')[0]?.type === 'reload';
+}
 
 function shouldPlayIntro() {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return false;
@@ -33,7 +37,17 @@ export default function Hero() {
   useEffect(() => {
     if (reduced && playing) finish();
   }, [reduced, playing, finish]);
+  // 새로고침은 이전 스크롤 위치·해시와 무관하게 인트로 → 히어로(최상단)에서 시작한다.
+  useLayoutEffect(() => {
+    if (!isReload()) return;
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    window.scrollTo(0, 0);
+    if (window.location.hash) {
+      history.replaceState(null, '', window.location.pathname + window.location.search);
+    }
+  }, []);
   useEffect(() => {
+    if (isReload()) return;
     const fragment = window.location.hash.slice(1);
     if (!fragment) return;
     const frame = requestAnimationFrame(() => {
