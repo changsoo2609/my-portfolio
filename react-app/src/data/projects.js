@@ -37,12 +37,12 @@ export const projects = [
   {
     key: 'batmeori',
     num: '✦ 02',
-    label: '밭머리 (BATMEORI) // 팀 프로젝트 (최우수상 1위)',
+    label: '밭머리 (BATMEORI) // 농담(農談) 팀 프로젝트 (최우수상 1위)',
     badge: 'SOLVERTHON 1ST',
     badgeVariant: 'award',
     title: '밭머리 (Batmeori)',
     subtitle:
-      '2026 전남광주 청년 AI 솔버톤 최우수상(트랙 1위) 팀 수상작 · 농장주와 외국인 근로자의 작업 소통',
+      '농담(農談) 팀 프로젝트 · 2026 전남광주 청년 AI 솔버톤 최우수상(트랙 1위) · 농장주와 외국인 근로자의 작업 소통',
     problemVariant: 'gold',
     problemIcon: 'verified',
     problem:
@@ -50,7 +50,7 @@ export const projects = [
     contribution: 'FastAPI·Supabase 백엔드, 접근 권한, 버전 트랜잭션, 전달 API',
     evidence: 'README의 아키텍처와 OpenAPI 명세에서 작업 흐름 확인',
     chips: ['FastAPI', 'Supabase', 'PostgreSQL', 'REST API'],
-    footerNote: '🏆 솔버톤 팀 수상',
+    footerNote: '🏆 농담(農談) 팀 수상',
     footerNoteClass: 'font-label-sm text-secondary font-mono font-semibold',
     links: [{ label: '밭머리 README', href: 'https://github.com/da960822-ux/kidding' }],
     deco: 'absolute -top-12 -right-12 w-40 h-40 bg-secondary-fixed/40 rounded-full blur-xl pointer-events-none',
