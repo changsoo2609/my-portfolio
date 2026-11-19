@@ -101,6 +101,8 @@ html:has(.hero-intro[open]) { overflow: hidden; }
   gap: 1.2rem;
   color: var(--intro-accent);
   transition: color .4s;
+  /* 01~04의 자릿 폭을 고정해 씬 전환마다 캡션이 좌우로 흔들리지 않게 한다. */
+  font-variant-numeric: tabular-nums;
 }
 .hero-intro__name { position: absolute; top: clamp(1rem, 5vw, 3rem); left: clamp(1rem, 6vw, 5rem); }
 .hero-intro__name span { color: var(--intro-accent); }

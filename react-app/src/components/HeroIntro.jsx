@@ -1,10 +1,11 @@
 import { memo, useLayoutEffect, useRef, useState } from 'react';
 import { motion } from 'motion/react';
 
+// 라벨은 모두 "한글 4자 + 공백"으로 폭을 맞춘다: 씬마다 캡션 폭이 달라지면 `01 / 04`가 좌우로 흔들린다.
 const scenes = [
-  { code: '404', label: '문제 발견', at: 0, background: '#081230', accent: '#eac779' },
-  { code: '500', label: '원인 분석', at: 740, background: '#1e223a', accent: '#efac8b' },
-  { code: '503', label: '연결 복구', at: 1480, background: '#0c2934', accent: '#a7ddd3' },
+  { code: '404', label: '길을 잃음', at: 0, background: '#081230', accent: '#eac779' },
+  { code: '500', label: '오류 직면', at: 740, background: '#1e223a', accent: '#efac8b' },
+  { code: '503', label: '재정비 중', at: 1480, background: '#0c2934', accent: '#a7ddd3' },
   { code: '200', label: '연결 완료', at: 2220, background: '#123c35', accent: '#a8efbb' },
 ];
 const duration = 3650;
