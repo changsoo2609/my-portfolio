@@ -131,15 +131,6 @@ export default function Header({ projectFilterScrollRef }) {
           >
             채용 문의
           </a>
-          <a
-            href="#celestial-dispatch"
-            aria-label="연락처"
-            className="w-8 h-8 shrink-0 rounded-full bg-primary flex items-center justify-center ml-space-xs shadow-inner"
-          >
-            <span aria-hidden="true" className="material-symbols-outlined text-on-primary text-[18px]">
-              person
-            </span>
-          </a>
         </div>
       </div>
     </header>

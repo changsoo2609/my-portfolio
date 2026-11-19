@@ -27,7 +27,7 @@ export default function ProjectCard({ project: p, visible, index }) {
       data-arcana={p.key}
       style={visible ? undefined : { display: 'none' }}
     >
-      <div className={p.deco}></div>
+      <div aria-hidden="true" className="absolute top-0 right-0 w-32 h-32 bg-secondary-fixed/20 rounded-bl-full pointer-events-none transition-all group-hover:scale-110" />
       <div>
         {/* Plate Header */}
         <div className="flex items-center justify-between pb-space-md mb-space-md">
@@ -55,31 +55,17 @@ export default function ProjectCard({ project: p, visible, index }) {
         </h3>
         <p className="font-body-md text-body-md text-on-surface-variant mt-1 mb-space-md">{p.subtitle}</p>
         {/* Solved Problem Block */}
-        {p.problemVariant === 'gold' ? (
-          <div className="p-space-md bg-secondary-fixed/15 rounded-lg mb-space-md">
-            <div className="flex items-center gap-space-xs text-secondary-fixed-dim font-title-md text-title-md mb-1">
-              <span aria-hidden="true" className="material-symbols-outlined text-[16px]">
-                {p.problemIcon}
-              </span>
-              <span className="text-primary font-semibold">해결한 핵심 문제 (Core Solved Problem)</span>
-            </div>
-            <p className="font-body-sm text-body-sm text-on-surface-variant leading-relaxed atelier-detail">
-              {p.problem}
-            </p>
+        <div className="p-space-md bg-surface-container-low rounded-lg mb-space-md">
+          <div className="flex items-center gap-space-xs text-primary font-title-md text-title-md mb-1">
+            <span aria-hidden="true" className="material-symbols-outlined text-[16px] text-secondary">
+              {p.problemIcon}
+            </span>
+            <span>해결한 핵심 문제 (Core Solved Problem)</span>
           </div>
-        ) : (
-          <div className="p-space-md bg-surface-container-low rounded-lg mb-space-md">
-            <div className="flex items-center gap-space-xs text-primary font-title-md text-title-md mb-1">
-              <span aria-hidden="true" className="material-symbols-outlined text-[16px] text-secondary">
-                {p.problemIcon}
-              </span>
-              <span>해결한 핵심 문제 (Core Solved Problem)</span>
-            </div>
-            <p className="font-body-sm text-body-sm text-on-surface-variant leading-relaxed atelier-detail">
-              {p.problem}
-            </p>
-          </div>
-        )}
+          <p className="font-body-sm text-body-sm text-on-surface-variant leading-relaxed atelier-detail">
+            {p.problem}
+          </p>
+        </div>
         {/* Engineering Schematic Details */}
         <div className="space-y-space-xs mb-space-lg">
           <div className="flex items-start gap-space-xs">
