@@ -1,5 +1,5 @@
 import { memo, useLayoutEffect, useRef, useState } from 'react';
-import { AnimatePresence, motion } from 'motion/react';
+import { motion } from 'motion/react';
 
 const scenes = [
   { code: '404', label: '문제 발견', at: 0, background: '#081230', accent: '#eac779' },
@@ -76,14 +76,12 @@ export default function HeroIntro({ onFinish, onReveal }) {
           <div className="hero-intro__digits" aria-hidden="true" data-code={scene.code}>
             {scene.code.split('').map((digit, slot) => (
               <div className="hero-intro__slot" key={slot}>
-                <AnimatePresence initial={false}>
-                  <motion.span key={digit}
-                    initial={{ ...digitShapes[slot], opacity: 0 }}
-                    animate={{ y: 0, scaleY: 1, skewX: 0, clipPath: 'inset(0% 0 0% 0)', opacity: 1 }}
-                    exit={{ ...digitShapes[(slot + 1) % 3], opacity: 0 }}
-                    transition={{ duration: 0.51, delay: slot * 0.055, ease }}
-                  >{digit}</motion.span>
-                </AnimatePresence>
+                <motion.span
+                  key={digit}
+                  initial={{ ...digitShapes[slot], opacity: 0 }}
+                  animate={{ y: 0, scaleY: 1, skewX: 0, clipPath: 'inset(0% 0 0% 0)', opacity: 1 }}
+                  transition={{ duration: 0.51, delay: slot * 0.055, ease }}
+                >{digit}</motion.span>
               </div>
             ))}
           </div>
