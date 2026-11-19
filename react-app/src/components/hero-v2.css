@@ -15,7 +15,7 @@
 @media(prefers-reduced-motion:reduce) { .dynamic-grid__ambient,.dynamic-grid__trails path { animation:none; } .dynamic-grid__spot,.dynamic-grid__focus { display:none; } }
 .hero-v2__center { max-width:56rem; margin:auto; text-align:center; }
 .hero-v2__role { display:inline-block; padding:.4rem 1rem; border-radius:999px; background:#fff; color:#735c00; font:600 .75rem/1.5 Inter,system-ui,sans-serif; margin-bottom:1.5rem; }
-.hero-v2__title { color:#081230; font:750 clamp(2rem,4vw,3.5rem)/1.28 Inter,system-ui,sans-serif; letter-spacing:-.045em; word-break:keep-all; }
+.hero-v2__title { color:#081230; font:750 clamp(2rem,4vw,3.5rem)/1.28 'Noto Sans KR','Malgun Gothic',sans-serif; letter-spacing:-.045em; word-break:keep-all; }
 .hero-v2__title span { color:#735c00; font-size:.75em; font-weight:700; background:linear-gradient(transparent 75%,#e9c34940 75%); box-decoration-break:clone; -webkit-box-decoration-break:clone; }
 .hero-v2__title:focus { outline:none; }
 .hero-v2__summary { max-width:42rem; margin:1.5rem auto 2rem; color:#45464e; font:400 1rem/1.8 Inter,system-ui,sans-serif; word-break:keep-all; }
