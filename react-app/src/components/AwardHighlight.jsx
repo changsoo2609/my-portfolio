@@ -28,7 +28,7 @@ export default function AwardHighlight() {
             2026 전남광주 청년(YOUTH) AI 솔버톤 최우수상
           </h2>
           <p className="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
-            밭머리 팀 수상 · FastAPI와 Supabase로 접근 권한과 작업 전달 API를 구현했습니다.
+            농담(農談) 팀 수상 · 밭머리 프로젝트에서 FastAPI와 Supabase로 접근 권한과 작업 전달 API를 구현했습니다.
           </p>
         </div>
       </div>
